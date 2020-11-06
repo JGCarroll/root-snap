@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=PYROOT
+Comment="An open-source data analysis framework used by high energy physics and others."
+Exec=root-framework.pyroot
+Icon=${SNAP}/meta/gui/pyroot.png
+Type=Application
+Terminal=true
+Categories=Science;
+

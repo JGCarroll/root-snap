@@ -1,0 +1,165 @@
+name: root-framework
+base: core20
+version: 'v6-22-02'
+summary: Analyzing petabytes of data, scientifically.
+description: |
+  An open-source data analysis framework used by high energy physics and others. 
+  
+  This snap is intended to provide an easy to install package of the ROOT framework for the layman user. It is provided for those who may find it useful, but users are reminded that there is a preference for the official ROOT upstream builds for professional use cases.
+  
+  Due to the sandboxing imposed by snapd, ROOT will only be able to read/write files in a users $HOME directory or over specific network protocols (E.G, preventing GVFS/Samba/etc). It is folly to attempt to read/write userdata in any other location using this package.
+  
+  This package can be invoked by running 'root-framework' into the terminal, and PYROOT as 'root-framework.pyroot'. Remember to import ROOT!
+
+grade: stable
+confinement: strict
+license: LGPL-2.1+
+
+parts:
+  root:
+    plugin: cmake
+    source: https://github.com/root-project/root.git
+    source-tag: v6-22-02 
+    source-depth: 1
+    build-packages:
+      - libx11-dev
+      - libxpm-dev
+      - libxft-dev
+      - libxext-dev
+      - libpython3-dev
+      - libssl-dev
+      - libpcre++-dev
+      - liblzma-dev
+      - libzstd-dev
+      - libxxhash-dev
+      - liblz4-dev
+      - libgif-dev
+      - libtiff-dev
+      - libjpeg-dev
+      - libafterimage-dev
+      - libgsl-dev
+      - xlibmesa-glu-dev
+      - libxml2-dev
+      - libsqlite3-dev
+      - libfftw3-dev
+      - libcfitsio-dev
+      - libtbb-dev
+      - libblas-dev
+      - libftgl-dev
+      - libpythia8-dev
+      - python3-numpy
+      - libglew-dev
+      - davix-dev
+      - libgl2ps-dev
+    stage-packages:
+      - libafterimage0
+      - libasn1-8-heimdal
+      - libbrotli1
+      - libcairo-gobject2
+      - libcairo2
+      - libcfitsio8
+      - libcurl3-gnutls
+      - libdatrie1
+      - libfftw3-double3
+      - libfontconfig1
+      - libfreetype6
+      - libfribidi0
+      - libftgl2
+      - libgdk-pixbuf2.0-0
+      - libgl1
+      - libglu1-mesa
+      - libglvnd0
+      - libglx0
+      - libgraphite2-3
+      - libgsl23
+      - libgslcblas0
+      - libgssapi3-heimdal
+      - libharfbuzz0b
+      - libhcrypto4-heimdal
+      - libheimbase1-heimdal
+      - libheimntlm0-heimdal
+      - libhx509-5-heimdal
+      - libicu66
+      - libjbig0
+      - libjpeg-turbo8
+      - libkrb5-26-heimdal
+      - libldap-2.4-2
+      - libnghttp2-14
+      - libopengl0
+      - libpango-1.0-0
+      - libpangocairo-1.0-0
+      - libpangoft2-1.0-0
+      - libpixman-1-0
+      - libpng16-16
+      - libpsl5
+      - libpython3.8
+      - libroken18-heimdal
+      - librsvg2-2
+      - librtmp1
+      - libsasl2-2
+      - libssh-4
+      - libtbb2
+      - libthai0
+      - libtiff5
+      - libwebp6
+      - libwind0-heimdal
+      - libx11-6
+      - libxau6
+      - libxcb-render0
+      - libxcb-shm0
+      - libxcb1
+      - libxdmcp6
+      - libxext6
+      - libxft2
+      - libxml2
+      - libxpm4
+      - libxrender1
+      - libxxhash0
+      - libblas3
+      - libstdc++-9-dev
+      - libc6-dev
+      - libdavix0v5
+      - libgl2ps1.4
+      - libglew2.1
+      - libpythia8v5
+
+  extras:
+    plugin: dump
+    source: extras/
+
+layout:
+  /usr/share/libdrm:
+    bind: $SNAP/usr/share/libdrm
+  /usr/include:
+    bind: $SNAP/usr/include
+
+apps:
+  root-framework:
+    command: usr/local/bin/root
+    command-chain: 
+      - bin/setup-sandbox.sh
+    plugs:
+      - home
+      - network
+      - opengl
+      - x11
+      - desktop
+      - desktop-legacy
+    environment:
+      DISABLE_WAYLAND: 1
+      LD_LIBRARY_PATH: ${SNAP}/usr/local/lib:${LD_LIBRARY_PATH}
+  pyroot:
+    command: bin/pyroot.sh
+    command-chain: 
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+    environment:
+      PYTHONPATH: ${SNAP}/usr/local/lib
+      LD_LIBRARY_PATH: ${SNAP}/usr/local/lib:${LD_LIBRARY_PATH}
+      DISABLE_WAYLAND: 1
