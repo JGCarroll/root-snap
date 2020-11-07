@@ -16,6 +16,8 @@ description: |
 grade: stable
 confinement: strict
 license: LGPL-2.1+
+architectures:
+  - build-on: amd64
 
 parts:
   root:
