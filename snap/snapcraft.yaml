@@ -11,6 +11,8 @@ description: |
   
   This package can be invoked by running 'root-framework' into the terminal, and PYROOT as 'root-framework.pyroot'. Remember to import ROOT!
 
+  Jupyter functionally is functional and can be accessed with 'root-framework --notebook'.
+
 grade: stable
 confinement: strict
 license: LGPL-2.1+
@@ -122,16 +124,34 @@ parts:
       - libgl2ps1.4
       - libglew2.1
       - libpythia8v5
+      - jupyter
+      - jupyter-notebook
+      - python3-scipy
+      - python3-numpy
+      - python3-matplotlib
+      - python3-pandas
+    organize:
+      usr/lib/*-linux-gnu/blas/*: usr/lib/
+      usr/lib/*-linux-gnu/lapack/*: usr/lib/
+      
 
   extras:
     plugin: dump
     source: extras/
+
+environment:
+  PYTHONPATH: ${SNAP}/usr/local/lib:${SNAP}/usr/lib/python3/dist-packages
+  LD_LIBRARY_PATH: ${SNAP}/usr/local/lib:${LD_LIBRARY_PATH}
+  DISABLE_WAYLAND: 1
+  MATPLOTLIBRC: ${SNAP}/etc/matplotlibrc
 
 layout:
   /usr/share/libdrm:
     bind: $SNAP/usr/share/libdrm
   /usr/include:
     bind: $SNAP/usr/include
+  /usr/share/matplotlib:
+    bind: $SNAP/usr/share/matplotlib
 
 apps:
   root-framework:
@@ -145,9 +165,6 @@ apps:
       - x11
       - desktop
       - desktop-legacy
-    environment:
-      DISABLE_WAYLAND: 1
-      LD_LIBRARY_PATH: ${SNAP}/usr/local/lib:${LD_LIBRARY_PATH}
   pyroot:
     command: bin/pyroot.sh
     command-chain: 
@@ -159,7 +176,3 @@ apps:
      - x11
      - desktop
      - desktop-legacy
-    environment:
-      PYTHONPATH: ${SNAP}/usr/local/lib
-      LD_LIBRARY_PATH: ${SNAP}/usr/local/lib:${LD_LIBRARY_PATH}
-      DISABLE_WAYLAND: 1
