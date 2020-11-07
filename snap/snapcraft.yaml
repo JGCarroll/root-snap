@@ -178,3 +178,245 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+  genreflex:
+    command: usr/local/bin/genreflex
+    command-chain: 
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  hadd:
+    command: usr/local/bin/hadd
+    command-chain: 
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  hist2workspace:
+    command: usr/local/bin/hist2workspace
+    command-chain: 
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  memprobe:
+    command: usr/local/bin/memprobe
+    command-chain: 
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  prepareHistFactory:
+    command: usr/local/bin/prepareHistFactory
+    command-chain: 
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  proofserv:
+    command: usr/local/bin/proofserv
+    command-chain: 
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  rmkdepend:
+    command: usr/local/bin/rmkdepend
+    command-chain: 
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  root-config:
+    command: usr/local/bin/root-config
+    command-chain: 
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  rootbrowse:
+    command: usr/local/bin/rootbrowse
+    command-chain: 
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  rootcint:
+    command: usr/local/bin/rootcint
+    command-chain: 
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  rootcling:
+    command: usr/local/bin/rootcling
+    command-chain: 
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  rootcp:
+    command: usr/local/bin/rootcp
+    command-chain: 
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  rootdrawtree:
+    command: usr/local/bin/rootdrawtree
+    command-chain: 
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  rooteventselector:
+    command: usr/local/bin/rooteventselector
+    command-chain: 
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  rootls:
+    command: usr/local/bin/rootls
+    command-chain: 
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  rootmkdir:
+    command: usr/local/bin/rootmkdir
+    command-chain: 
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  rootmv:
+    command: usr/local/bin/rootmv
+    command-chain: 
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  rootprint:
+    command: usr/local/bin/rootprint
+    command-chain: 
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  rootrm:
+    command: usr/local/bin/rootrm
+    command-chain: 
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  roots:
+    command: usr/local/bin/roots
+    command-chain: 
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  rootslimtree:
+    command: usr/local/bin/rootslimtree
+    command-chain: 
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  xpdtest:
+    command: usr/local/bin/xpdtest
+    command-chain: 
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
