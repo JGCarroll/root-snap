@@ -5,13 +5,19 @@ summary: Analyzing petabytes of data, scientifically.
 description: |
   An open-source data analysis framework used by high energy physics and others. 
   
-  This snap is intended to provide an easy to install package of the ROOT framework for the layman user. It is provided for those who may find it useful, but users are reminded that there is a preference for the official ROOT upstream builds for professional use cases.
+  This snap is intended to provide an easy to install package of the ROOT framework for the home user. It is provided for those who may find it useful, but users are reminded that there is a preference for the official ROOT upstream builds for professional use cases.
   
   Due to the sandboxing imposed by snapd, ROOT will only be able to read/write files in a users $HOME directory or over specific network protocols (E.G, preventing GVFS/Samba/etc). It is folly to attempt to read/write userdata in any other location using this package.
   
-  This package can be invoked by running 'root-framework' into the terminal, and PYROOT as 'root-framework.pyroot'. Remember to import ROOT!
+  This package can be invoked by running 'root-framework' into the terminal, and PyROOT as 'root-framework.pyroot'. Remember to import ROOT!
 
-  Jupyter functionally is functional and can be accessed with 'root-framework --notebook'.
+  Jupyter functionally is functional and can be accessed with 'root-framework --notebook'. JupyROOT may be preferential to running a Python interactive shell directly.
+  
+  This package is bundled with Python 3.8, and the Matplotlib, SciPy, NumPy, and Pandas libraries preconfigured. As it is a snap, it will not access nor depend on any other system libraries, including Jupyter itself.
+  
+  Users can view available ROOT binaries with 'snap info root-framework'. ROOT binaries are namespaced, so that hadd would be accessible as 'root-framework.hadd'
+
+  Users are encouraged to make use of aliases to rename the binaries to their traditional values, if desired. For example, 'sudo snap alias root-framework root' would allow you to simply run 'root --notebook', similarly, 'sudo snap alias root-framework.hadd hadd', etc.
 
 grade: stable
 confinement: strict
