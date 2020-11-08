@@ -138,6 +138,9 @@ parts:
       - python3-numpy
       - python3-matplotlib
       - python3-pandas
+    override-stage: |
+      snapcraftctl stage
+      sed -i "s/'.ipynb_checkpoints',/os.path.join(os.environ[\"SNAP_USER_COMMON\"], \".ipynb_checkpoints\"),/g" ${SNAPCRAFT_STAGE}/usr/lib/python3/dist-packages/notebook/services/contents/filecheckpoints.py
     organize:
       usr/lib/*-linux-gnu/blas/*: usr/lib/
       usr/lib/*-linux-gnu/lapack/*: usr/lib/
