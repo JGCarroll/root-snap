@@ -3,25 +3,26 @@ base: core20
 version: 'v6-22-02'
 summary: Analyzing petabytes of data, scientifically.
 description: |
-  An open-source data analysis framework used by high energy physics and others. 
-  
-  This snap is intended to provide an easy to install package of the ROOT framework for the home user. It is provided for those who may find it useful, but users are reminded that there is a preference for the official ROOT upstream builds for professional use cases.
-  
-  Due to the sandboxing imposed by snapd, ROOT will only be able to read/write files in a users $HOME directory or over specific network protocols (E.G, preventing GVFS/Samba/etc). It is folly to attempt to read/write userdata in any other location using this package.
-  
-  This package can be invoked by running 'root-framework' into the terminal, and PyROOT as 'root-framework.pyroot'. Remember to import ROOT!
+  https://root.cern
 
-  Jupyter functionally is functional and can be accessed with 'root-framework --notebook'. JupyROOT may be preferential to running a Python interactive shell directly.
-  
-  This package is bundled with Python 3.8, and the Matplotlib, SciPy, NumPy, and Pandas libraries preconfigured. As it is a snap, it will not access nor depend on any other system libraries, including Jupyter itself.
-  
-  Users can view available ROOT binaries with 'snap info root-framework'. ROOT binaries are namespaced, so that hadd would be accessible as 'root-framework.hadd'
+  This snap is intended to provide an easy-to-install package of the ROOT framework for the home user. It comes bundled along with Python 3.8/PyROOT and Jupyter/JupyROOT notebook capability. NumPy, SciPy, Pandas and Matplotlib are bundled with the Python environments.
 
-  Users are encouraged to make use of aliases to rename the binaries to their traditional values, if desired. For example, 'sudo snap alias root-framework root' would allow you to simply run 'root --notebook', similarly, 'sudo snap alias root-framework.hadd hadd', etc.
+  Snaps are container packages for easy application deployment, designed to be consistent and reliable across different host distributions. They additionally impose some strong sandboxing for security. One caveat of this sandboxing is that this package can only read/write to your `$HOME` directory, or via specific network protocols. It is highly advised that you place all your data files in your `$HOME` directory to be accessible. 
+
+  Users are encouraged to use the command `snap info root-framework` to see the binaries available to them from the ROOT framework. By default, ROOT can be accessed with the command `root-framework`. Users may wish to use an alias so that it is simply accessible with `root`. Similarly, by default, other binaries such as hadd can be accessed with `root-framework.hadd`, which again can be aliased as `hadd`. Jupyter notebook support can be utilised with `root-framework --notebook`, or `root --notebook` if aliased.
+
+
+   sudo snap alias root-framework root
+   sudo snap alias root-framework.hadd hadd
+
+
+  Because snaps are containers and don't affect the host system, using PyROOT with `import ROOT` will not work in a system Python shell. Users are encouraged to use `root-framework.pyroot` to access the containers' Python shell, where `import ROOT` would become available. Again, this can be aliased for simple usage such as `pyroot script.py`.
+
+   sudo snap alias root-framework.pyroot pyroot
 
 grade: stable
 confinement: strict
-license: LGPL-2.1+
+license: LGPL-2.1+ AND GPL-3.0
 architectures:
   - build-on: amd64
 
