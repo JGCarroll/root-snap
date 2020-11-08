@@ -9,6 +9,7 @@ Users are encouraged to use the command `snap info root-framework` to see the bi
 
 
 `sudo snap alias root-framework root`
+
 `sudo snap alias root-framework.hadd hadd`
 
 

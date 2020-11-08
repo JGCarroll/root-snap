@@ -13,6 +13,7 @@ description: |
 
 
    sudo snap alias root-framework root
+
    sudo snap alias root-framework.hadd hadd
 
 
