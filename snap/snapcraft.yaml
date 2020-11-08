@@ -132,23 +132,31 @@ parts:
       - libgl2ps1.4
       - libglew2.1
       - libpythia8v5
-      - jupyter
-      - jupyter-notebook
-      - python3-scipy
-      - python3-numpy
-      - python3-matplotlib
-      - python3-pandas
-    override-stage: |
-      snapcraftctl stage
-      sed -i "s/'.ipynb_checkpoints',/os.path.join(os.environ[\"SNAP_USER_COMMON\"], \".ipynb_checkpoints\"),/g" ${SNAPCRAFT_STAGE}/usr/lib/python3/dist-packages/notebook/services/contents/filecheckpoints.py
     organize:
       usr/lib/*-linux-gnu/blas/*: usr/lib/
       usr/lib/*-linux-gnu/lapack/*: usr/lib/
-      
+    override-stage: |
+      sed -i "s/'.ipynb_checkpoints',/os.path.join(os.environ[\"SNAP_USER_COMMON\"], \".ipynb_checkpoints\"),/g" ${SNAPCRAFT_STAGE}/lib/python3.8/site-packages/notebook/services/contents/filecheckpoints.py
+      snapcraftctl stage
+
 
   extras:
     plugin: dump
     source: extras/
+    
+  python-modules:
+    plugin: python
+    source: extras/ # Defined above, will effectively no-op as it should deduplicate with extras part
+    python-packages: 
+      - scipy
+      - numpy
+      - pandas
+      - matplotlib
+      - metakernel
+      - jupyter
+    override-build: | # Workaround bug where lib64 is defined as a symlink and hence conflicts with root part
+      snapcraftctl build
+      rm $SNAPCRAFT_PART_INSTALL/lib64
 
 environment:
   PYTHONPATH: ${SNAP}/usr/local/lib:${SNAP}/usr/lib/python3/dist-packages
