@@ -8,18 +8,12 @@ description: |
   This snap is intended to provide an easy-to-install package of the ROOT framework for the home user. It comes bundled along with Python 3.8/PyROOT and Jupyter/JupyROOT notebook capability. NumPy, SciPy, Pandas and Matplotlib are bundled with the Python environments.
 
   Snaps are container packages for easy application deployment, designed to be consistent and reliable across different host distributions. They additionally impose some strong sandboxing for security. One caveat of this sandboxing is that this package can only read/write to your `$HOME` directory, or via specific network protocols. It is highly advised that you place all your data files in your `$HOME` directory to be accessible. 
+  
+  Because snaps are containers and don't affect the host system, using PyROOT with `import ROOT` will not work in a system Python shell. Users are encouraged to use the command `pyroot` to access the containers' Python shell, where `import ROOT` would become available. Scripts can be passed to `pyroot` to be executed in PyROOTs context, E.G, `pyroot ./myScript.py`, or put in the scripts shebang. E.G `#!/snap/bin/pyroot`
+  
+  JupyROOT can be accessed by running `root --notebook`.
 
-  Users are encouraged to use the command `snap info root-framework` to see the binaries available to them from the ROOT framework. By default, ROOT can be accessed with the command `root-framework`. Users may wish to use an alias so that it is simply accessible with `root`. Similarly, by default, other binaries such as hadd can be accessed with `root-framework.hadd`, which again can be aliased as `hadd`. Jupyter notebook support can be utilised with `root-framework --notebook`, or `root --notebook` if aliased.
-
-
-   sudo snap alias root-framework root
-
-   sudo snap alias root-framework.hadd hadd
-
-
-  Because snaps are containers and don't affect the host system, using PyROOT with `import ROOT` will not work in a system Python shell. Users are encouraged to use `root-framework.pyroot` to access the containers' Python shell, where `import ROOT` would become available. Again, this can be aliased for simple usage such as `pyroot script.py`.
-
-   sudo snap alias root-framework.pyroot pyroot
+  For user convenience, application entries for ROOT and PyROOT will be placed into the systems start menu by default. 
 
 grade: stable
 confinement: strict
@@ -431,6 +425,61 @@ apps:
   xpdtest:
     command: usr/local/bin/xpdtest
     command-chain: 
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  root-exe:
+    command: usr/local/bin/root.exe
+    command-chain:
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  rootn-exe:
+    command: usr/local/bin/rootn.exe
+    command-chain:
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  rootnb-exe:
+    command: usr/local/bin/rootnb.exe
+    command-chain:
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  roots-exe:
+    command: usr/local/bin/roots.exe
+    command-chain:
+     - bin/setup-sandbox.sh
+    plugs:
+     - home
+     - network
+     - opengl
+     - x11
+     - desktop
+     - desktop-legacy
+  proofserv-exe:
+    command: usr/local/bin/proofserv.exe
+    command-chain:
      - bin/setup-sandbox.sh
     plugs:
      - home
