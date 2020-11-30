@@ -1,6 +1,6 @@
 name: root-framework
 base: core20
-version: 'v6-22-04'
+version: 'v6-22-06'
 summary: Analyzing petabytes of data, scientifically.
 description: |
   https://root.cern
@@ -25,7 +25,7 @@ parts:
   root:
     plugin: cmake
     source: https://github.com/root-project/root.git
-    source-tag: v6-22-04
+    source-tag: v6-22-06
     source-depth: 1
     build-packages:
       - libx11-dev
