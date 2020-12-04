@@ -156,7 +156,7 @@ parts:
 
 environment:
   PYTHONPATH: ${SNAP}/usr/local/lib:${SNAP}/usr/lib/python3/dist-packages
-  LD_LIBRARY_PATH: ${SNAP}/usr/local/lib:${LD_LIBRARY_PATH}
+  LD_LIBRARY_PATH: ${SNAP}/usr/local/lib
   DISABLE_WAYLAND: 1
   MATPLOTLIBRC: ${SNAP}/etc/matplotlibrc
   XAUTHORITY: ${SNAP_REAL_HOME}/.Xauthority
