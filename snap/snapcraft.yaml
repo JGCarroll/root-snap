@@ -1,6 +1,5 @@
 name: root-framework
 base: core20
-version: 'v6-22-06'
 summary: Analyzing petabytes of data, scientifically.
 description: |
   https://root.cern
@@ -15,18 +14,16 @@ description: |
 
   For user convenience, application entries for ROOT and PyROOT will be placed into the systems start menu by default. 
 
-grade: stable
 confinement: strict
 license: LGPL-2.1+ AND GPL-3.0
 architectures:
   - build-on: amd64
+adopt-info: root
 
 parts:
   root:
     plugin: cmake
     source: https://github.com/root-project/root.git
-    source-tag: v6-22-06
-    source-depth: 1
     build-packages:
       - libx11-dev
       - libxpm-dev
@@ -131,6 +128,18 @@ parts:
     organize:
       usr/lib/*-linux-gnu/blas/*: usr/lib/
       usr/lib/*-linux-gnu/lapack/*: usr/lib/
+    override-pull: |
+      snapcraftctl pull
+      minor_version=$(git describe --tags --abbrev=0 | grep -Eo "[0-9]*-[0-9]*-[0-9]*" | cut -d "-" -f 2)
+      patch_version=$(git describe --tags --abbrev=0 | grep -Eo "[0-9]*-[0-9]*-[0-9]*" | cut -d "-" -f 3)
+      if [ $(( $minor_version % 2)) -eq 0 ] && [ $(( $patch_version % 2 )) -eq 0 ]
+      then
+        snapcraftctl set-grade stable
+        snapcraftctl set-version "$(git describe --tags --abbrev=0)"
+      else
+        snapcraftctl set-grade devel
+        snapcraftctl set-version "$(git rev-parse --short HEAD).$(date -u +%d-%m-%y)"
+      fi
     override-stage: |
       sed -i "s/'.ipynb_checkpoints',/os.path.join(os.environ[\"SNAP_USER_COMMON\"], \".ipynb_checkpoints\"),/g" ${SNAPCRAFT_STAGE}/lib/python3.8/site-packages/notebook/services/contents/filecheckpoints.py
       snapcraftctl stage
