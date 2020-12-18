@@ -166,6 +166,16 @@ parts:
 environment:
   PYTHONPATH: ${SNAP}/usr/local/lib:${SNAP}/usr/lib/python3/dist-packages
   LD_LIBRARY_PATH: ${SNAP}/usr/local/lib
+  CLING_STANDARD_PCH: none
+  old_rootsys: ${ThisVarIntentionallyDoesNotExistRabbitCake}
+  DYLD_LIBRARY_PATH: ${ThisVarIntentionallyDoesNotExistRabbitCake}
+  SHLIB_PATH: ${ThisVarIntentionallyDoesNotExistRabbitCake}
+  LIBPATH: ${ThisVarIntentionallyDoesNotExistRabbitCake}
+  MANPATH: ${ThisVarIntentionallyDoesNotExistRabbitCake}
+  CMAKE_PREFIX_PATH: ${ThisVarIntentionallyDoesNotExistRabbitCake}
+  JUPYTER_PATH: ${ThisVarIntentionallyDoesNotExistRabbitCake}
+  JUPYTER_CONFIG_DIR: ${ThisVarIntentionallyDoesNotExistRabbitCake}
+  ROOTSYS: ${ThisVarIntentionallyDoesNotExistRabbitCake}
   DISABLE_WAYLAND: 1
   MATPLOTLIBRC: ${SNAP}/etc/matplotlibrc
   XAUTHORITY: ${SNAP_REAL_HOME}/.Xauthority
