@@ -19,10 +19,12 @@ By default, the latest master/HEAD is built. If the user wishes to build a speci
 
 Building your own ROOT snap can be helpful if you'd like to make modifications to the CMake parameters, add extra Python packages or just experiment with snaps in general. If any modifications might make sense to the general userbase, please feel free to suggest them!
 
+Please note that custom builds will use namespaced binaries by default. E.G, `root` will not be immediately available and will be only accessible as `root-framework`. Similarly, `hadd` will be available as `root-framework.hadd`. Make use of the `snap alias` commands to map these, examples [here](https://snapcraft.io/docs/commands-and-aliases). Automatic connection of interfaces to setup the sandboxing may differ between custom builds and builds downloaded from the store directly, be sure to read about interface management [here](https://snapcraft.io/docs/interface-management). Automatic interfaces and aliases are managed via an assertation signed via private key to ensure authenticity of the snap, which  is  handled transparently when using the normal `snap install root-framework` commands, or via the `snap ack` command.
+
 ## Support
 Users are encouraged to read the [compatibility guarantees](https://root.cern/about/versioning/) provided by ROOT.
 
-Nightly builds are generated from the latest upstream master/HEAD at 20:00 UTC per day. Build history can be viewed [here](https://launchpad.net/~build.snapcraft.io/+snap/9790de9d7f674085fa0db5a807f9607f). 
+Nightly builds are generated from the latest upstream master/HEAD at 20:00 UTC per day. Build history can be viewed [here](https://github.com/mrcarroll/root-snap/actions).
 
 This package is prioritised for users new to Linux or ROOT or both. This means that support is focused on getting the core of ROOT to work well first, and "edge case" functionality that is unlikely to make sense to a home user might not be as well supported and less a priority to fix. Regardless, please feel free to contact me with any feedback and issues and I'll take a look.
 
