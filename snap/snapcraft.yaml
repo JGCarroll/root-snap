@@ -19,6 +19,7 @@ license: LGPL-2.1+ AND GPL-3.0
 architectures:
   - build-on: amd64
 adopt-info: root
+compression: lzo
 
 parts:
   root:
