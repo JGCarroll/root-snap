@@ -532,6 +532,9 @@ for f in ${gtk_configs[@]}; do
   fi
 done
 
+## Make use of https://github.com/ericpruitt/homeishome
+export LD_PRELOAD=${SNAP}/lib/homeishome.so
+
 # create symbolic link to ibus socket path for ibus to look up its socket files
 # (see comments #3 and #6 on https://launchpad.net/bugs/1580463)
 IBUS_CONFIG_PATH=$XDG_CONFIG_HOME/ibus
