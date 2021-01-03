@@ -176,7 +176,7 @@ environment:
   CMAKE_PREFIX_PATH: ${ThisVarIntentionallyDoesNotExistRabbitCake}
   JUPYTER_PATH: ${ThisVarIntentionallyDoesNotExistRabbitCake}
   JUPYTER_CONFIG_DIR: ${ThisVarIntentionallyDoesNotExistRabbitCake}
-  ROOTSYS: ${ThisVarIntentionallyDoesNotExistRabbitCake}
+  ROOTSYS: ${SNAP}/usr/local
   DISABLE_WAYLAND: 1
   MATPLOTLIBRC: ${SNAP}/etc/matplotlibrc
   XAUTHORITY: ${SNAP_REAL_HOME}/.Xauthority
