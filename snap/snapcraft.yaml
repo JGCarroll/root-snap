@@ -202,6 +202,7 @@ apps:
       - x11
       - desktop
       - desktop-legacy
+      - removable-media
   pyroot:
     command: bin/pyroot.sh
     command-chain: 
@@ -213,6 +214,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   genreflex:
     command: usr/local/bin/genreflex
     command-chain: 
@@ -224,6 +226,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   hadd:
     command: usr/local/bin/hadd
     command-chain: 
@@ -235,6 +238,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   hist2workspace:
     command: usr/local/bin/hist2workspace
     command-chain: 
@@ -246,6 +250,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   memprobe:
     command: usr/local/bin/memprobe
     command-chain: 
@@ -257,6 +262,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   prepareHistFactory:
     command: usr/local/bin/prepareHistFactory
     command-chain: 
@@ -268,6 +274,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   proofserv:
     command: usr/local/bin/proofserv
     command-chain: 
@@ -279,6 +286,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   rmkdepend:
     command: usr/local/bin/rmkdepend
     command-chain: 
@@ -290,6 +298,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   root-config:
     command: usr/local/bin/root-config
     command-chain: 
@@ -301,6 +310,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   rootbrowse:
     command: usr/local/bin/rootbrowse
     command-chain: 
@@ -312,6 +322,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   rootcint:
     command: usr/local/bin/rootcint
     command-chain: 
@@ -323,6 +334,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   rootcling:
     command: usr/local/bin/rootcling
     command-chain: 
@@ -334,6 +346,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   rootcp:
     command: usr/local/bin/rootcp
     command-chain: 
@@ -345,6 +358,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   rootdrawtree:
     command: usr/local/bin/rootdrawtree
     command-chain: 
@@ -356,6 +370,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   rooteventselector:
     command: usr/local/bin/rooteventselector
     command-chain: 
@@ -367,6 +382,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   rootls:
     command: usr/local/bin/rootls
     command-chain: 
@@ -378,6 +394,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   rootmkdir:
     command: usr/local/bin/rootmkdir
     command-chain: 
@@ -389,6 +406,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   rootmv:
     command: usr/local/bin/rootmv
     command-chain: 
@@ -400,6 +418,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   rootprint:
     command: usr/local/bin/rootprint
     command-chain: 
@@ -411,6 +430,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   rootrm:
     command: usr/local/bin/rootrm
     command-chain: 
@@ -422,6 +442,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   roots:
     command: usr/local/bin/roots
     command-chain: 
@@ -433,6 +454,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   rootslimtree:
     command: usr/local/bin/rootslimtree
     command-chain: 
@@ -444,6 +466,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   xpdtest:
     command: usr/local/bin/xpdtest
     command-chain: 
@@ -455,6 +478,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   root-exe:
     command: usr/local/bin/root.exe
     command-chain:
@@ -466,6 +490,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   rootn-exe:
     command: usr/local/bin/rootn.exe
     command-chain:
@@ -477,6 +502,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   rootnb-exe:
     command: usr/local/bin/rootnb.exe
     command-chain:
@@ -488,6 +514,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   roots-exe:
     command: usr/local/bin/roots.exe
     command-chain:
@@ -499,6 +526,7 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
   proofserv-exe:
     command: usr/local/bin/proofserv.exe
     command-chain:
@@ -510,3 +538,4 @@ apps:
      - x11
      - desktop
      - desktop-legacy
+     - removable-media
