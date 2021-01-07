@@ -167,6 +167,7 @@ parts:
   homeishome: # Wrap around calls to determine $HOME to return the correct variable
     plugin: make
     source: https://github.com/ericpruitt/homeishome.git
+    source-commit: bc5fbcf4f8a974636f38c106142e9ffbc2902019
     make-parameters:
       - BIN=${SNAPCRAFT_PART_INSTALL}
       - LIB=${SNAPCRAFT_PART_INSTALL}
