@@ -216,7 +216,7 @@ prepend_dir XDG_DATA_DIRS $SNAP_USER_DATA
 
 # Set XDG_DATA_HOME to local path
 export XDG_DATA_HOME=$SNAP_USER_DATA/.local/share
-ensure_dir_exists $XDG_DATA_HOME
+ensure_dir_exists $XDG_DATA_HOME -m 700
 
 # Workaround for GLib < 2.53.2 not searching for schemas in $XDG_DATA_HOME:
 #   https://bugzilla.gnome.org/show_bug.cgi?id=741335
@@ -228,7 +228,7 @@ if [[ -d $SNAP_USER_DATA/.cache && ! -e $XDG_CACHE_HOME ]]; then
   # the .cache directory used to be stored under $SNAP_USER_DATA, migrate it
   mv $SNAP_USER_DATA/.cache $SNAP_USER_COMMON/
 fi
-ensure_dir_exists $XDG_CACHE_HOME
+ensure_dir_exists $XDG_CACHE_HOME -m 700
 
 # Create $XDG_RUNTIME_DIR if not exists (to be removed when LP: #1656340 is fixed)
 ensure_dir_exists $XDG_RUNTIME_DIR -m 700
@@ -532,9 +532,6 @@ for f in ${gtk_configs[@]}; do
   fi
 done
 
-## Make use of https://github.com/ericpruitt/homeishome
-export LD_PRELOAD=${SNAP}/lib/homeishome.so
-
 # create symbolic link to ibus socket path for ibus to look up its socket files
 # (see comments #3 and #6 on https://launchpad.net/bugs/1580463)
 IBUS_CONFIG_PATH=$XDG_CONFIG_HOME/ibus
@@ -551,10 +548,22 @@ ln -sfn $REALHOME/.config/ibus/bus $IBUS_CONFIG_PATH
 
 wait_for_async_execs
 
+############################
+# Custom ROOT Snap section #
+############################
+
+# Make use of https://github.com/ericpruitt/homeishome
+# Remember: bindtextdomain isn't preloaded in this snap, the locale is forced to C.UTF8 to match the Docker image defaults
+# If this changes, be sure to accomodate the line below
+export LD_PRELOAD=${SNAP}/lib/homeishome.so
+
+#########################
+# End of custom section #
+#########################
+
 if [ -n "$SNAP_DESKTOP_DEBUG" ]; then
   echo "desktop-launch elapsed time: " $(date +%s.%N --date="$START seconds ago") 
   echo "Now running: exec $@"
 fi
 
 exec "$@"
-
