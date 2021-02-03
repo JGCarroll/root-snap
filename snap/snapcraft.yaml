@@ -167,18 +167,6 @@ parts:
       snapcraftctl build
       rm $SNAPCRAFT_PART_INSTALL/lib64
 
-  homeishome: # Wrap around calls to determine $HOME to return the correct variable
-    plugin: make
-    source: https://github.com/ericpruitt/homeishome.git
-    source-commit: bc5fbcf4f8a974636f38c106142e9ffbc2902019
-    make-parameters:
-      - BIN=${SNAPCRAFT_PART_INSTALL}
-      - LIB=${SNAPCRAFT_PART_INSTALL}
-      - all
-    organize:
-      homeishome.so: lib/homeishome.so
-      homeishome: bin/homeishome
-
 environment:
   PYTHONPATH: ${SNAP}/usr/local/lib:${SNAP}/usr/lib/python3/dist-packages
   LD_LIBRARY_PATH: ${SNAP}/usr/local/lib

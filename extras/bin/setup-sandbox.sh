@@ -548,19 +548,6 @@ ln -sfn $REALHOME/.config/ibus/bus $IBUS_CONFIG_PATH
 
 wait_for_async_execs
 
-############################
-# Custom ROOT Snap section #
-############################
-
-# Make use of https://github.com/ericpruitt/homeishome
-# Remember: bindtextdomain isn't preloaded in this snap, the locale is forced to C.UTF8 to match the Docker image defaults
-# If this changes, be sure to accomodate the line below
-export LD_PRELOAD=${SNAP}/lib/homeishome.so
-
-#########################
-# End of custom section #
-#########################
-
 if [ -n "$SNAP_DESKTOP_DEBUG" ]; then
   echo "desktop-launch elapsed time: " $(date +%s.%N --date="$START seconds ago") 
   echo "Now running: exec $@"
