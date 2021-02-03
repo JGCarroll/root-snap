@@ -188,11 +188,11 @@ environment:
 
 layout:
   /usr/share/libdrm:
-    bind: $SNAP/usr/share/libdrm
+    symlink: $SNAP/usr/share/libdrm
   /usr/include:
     bind: $SNAP/usr/include
   /usr/share/matplotlib:
-    bind: $SNAP/usr/share/matplotlib
+    symlink: $SNAP/usr/share/matplotlib
 
 
 apps:
