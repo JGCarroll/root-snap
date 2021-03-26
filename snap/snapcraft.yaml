@@ -212,11 +212,11 @@ environment:
 
 layout:
   /usr/share/libdrm:
-    bind: $SNAP/usr/share/libdrm
+    symlink: $SNAP/usr/share/libdrm
   /usr/include:
     bind: $SNAP/usr/include
   /usr/share/matplotlib:
-    bind: $SNAP/usr/share/matplotlib
+    symlink: $SNAP/usr/share/matplotlib
   /usr/lib/x86_64-linux-gnu/libc_nonshared.a:	# ACLiC
     symlink: $SNAP/usr/lib/x86_64-linux-gnu/libc_nonshared.a
 
