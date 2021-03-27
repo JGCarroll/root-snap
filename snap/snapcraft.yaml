@@ -4,7 +4,7 @@ summary: Analyzing petabytes of data, scientifically.
 description: |
   https://root.cern
 
-  This snap is intended to provide an easy-to-install package of the ROOT framework for the home user. It comes bundled along with Python 3.8/PyROOT and Jupyter/JupyROOT notebook capability. NumPy, SciPy, Pandas and Matplotlib are bundled with the Python environments.
+  This snap is intended to provide an easy-to-install package of the ROOT framework for the home user. It comes bundled along with Python 3.8/PyROOT and Jupyter/JupyROOT notebook capability. NumPy, SciPy, Pandas, Matplotlib and Tensorflow/Keras are bundled with the Python environments.
 
   Snaps are container packages for easy application deployment, designed to be consistent and reliable across different host distributions. They additionally impose some strong sandboxing for security. One caveat of this sandboxing is that this package can only read/write to your `$HOME` directory, or via specific network protocols. It is highly advised that you place all your data files in your `$HOME` directory to be accessible. 
   
@@ -54,7 +54,6 @@ parts:
       - libblas-dev
       - libftgl-dev
       - libpythia8-dev
-      - python3-numpy
       - libglew-dev
       - davix-dev
       - libgl2ps-dev
@@ -131,6 +130,7 @@ parts:
       - libglew2.1
       - libpythia8v5
       - python3-dev
+      - curl
     organize:
       usr/lib/*-linux-gnu/blas/*: usr/lib/
       usr/lib/*-linux-gnu/lapack/*: usr/lib/
@@ -157,6 +157,8 @@ parts:
       snapcraftctl prime
       cd $SNAPCRAFT_PRIME/usr/bin
       [ ! -f c++ ] && ln -s g++ c++	# ACLiC
+    after:
+      [python-modules]
 
 
   extras:
@@ -168,11 +170,13 @@ parts:
     source: extras/ # Defined above, will effectively no-op as it should deduplicate with extras part
     python-packages: 
       - scipy
-      - numpy
       - pandas
       - matplotlib
       - metakernel
       - jupyter
+      - tensorflow ~=2.4.1
+      - keras ~=2.4.3
+      - numpy ~=1.19.2
     override-build: | # Workaround bug where lib64 is defined as a symlink and hence conflicts with root part
       snapcraftctl build
       rm $SNAPCRAFT_PART_INSTALL/lib64
