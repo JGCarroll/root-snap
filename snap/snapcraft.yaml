@@ -27,6 +27,8 @@ parts:
     source: https://github.com/root-project/root.git
     cmake-parameters: 
       - -DCMAKE_CXX_STANDARD=17
+    build-snaps:
+      - cmake
     build-packages:
       - libx11-dev
       - libxpm-dev
