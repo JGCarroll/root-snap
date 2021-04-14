@@ -146,13 +146,7 @@ parts:
         snapcraftctl set-grade devel
         snapcraftctl set-version "$(git rev-parse --short HEAD).$(date -u +%d-%m-%y)"
       fi
-      sed -i '/exit 0/d' $SNAPCRAFT_PART_SRC/build/unix/compiledata.sh
-      cat >> $SNAPCRAFT_PART_SRC/build/unix/compiledata.sh << 'EOF'	# Patches for ACLiC
-      sed -i 's#-isystem/root/parts/root/install/usr/include/x86_64-linux-gnu##g' $COMPILEDATA
-      sed -i 's#-isystem/root/parts/root/install/usr/include##g' $COMPILEDATA
-      sed -i 's#-isystem/root/stage/include##g' $COMPILEDATA
-      exit 0
-      EOF
+      patch -i $SNAPCRAFT_PROJECT_DIR/patches/ROOT/ACliC.patch -p 1
     override-prime: |
       snapcraftctl prime
       cd $SNAPCRAFT_PRIME/usr/bin
@@ -180,8 +174,7 @@ parts:
     override-build: | # Workaround bug where lib64 is defined as a symlink and hence conflicts with root part
       snapcraftctl build
       rm $SNAPCRAFT_PART_INSTALL/lib64
-      sed -i "s/'.ipynb_checkpoints',/os.path.join(os.environ[\"SNAP_USER_COMMON\"], \".ipynb_checkpoints\"),/g" ${SNAPCRAFT_PART_INSTALL}/lib/python3.8/site-packages/notebook/services/contents/filecheckpoints.py
-
+      patch -d $SNAPCRAFT_PART_INSTALL -i $SNAPCRAFT_PROJECT_DIR/patches/notebook/checkpoints.patch -p0
 
   homeishome: # Wrap around calls to determine $HOME to return the correct variable
     plugin: make
