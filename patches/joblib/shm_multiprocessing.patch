@@ -1,0 +1,73 @@
+Common subdirectories: lib/python3.8/site-packages/joblib/externals and joblib/externals
+diff -u lib/python3.8/site-packages/joblib/_memmapping_reducer.py joblib/_memmapping_reducer.py
+--- lib/python3.8/site-packages/joblib/_memmapping_reducer.py	2021-04-14 18:35:57.000000000 +0100
++++ joblib/_memmapping_reducer.py	2021-04-14 19:05:46.657786564 +0100
+@@ -38,7 +38,7 @@
+ 
+ # Some system have a ramdisk mounted by default, we can use it instead of /tmp
+ # as the default folder to dump big arrays to share with subprocesses.
+-SYSTEM_SHARED_MEM_FS = '/dev/shm'
++SYSTEM_SHARED_MEM_FS = '/dev/shm/snap.root-framework.joblib'
+ 
+ # Minimal number of bytes available on SYSTEM_SHARED_MEM_FS to consider using
+ # it as the default folder to dump big arrays to share with subprocesses.
+diff -u lib/python3.8/site-packages/joblib/_multiprocessing_helpers.py joblib/_multiprocessing_helpers.py
+--- lib/python3.8/site-packages/joblib/_multiprocessing_helpers.py	2021-04-14 18:35:57.000000000 +0100
++++ joblib/_multiprocessing_helpers.py	2021-04-14 19:07:51.918226299 +0100
+@@ -19,30 +19,30 @@
+ 
+ # 2nd stage: validate that locking is available on the system and
+ #            issue a warning if not
+-if mp is not None:
+-    try:
+-        # try to create a named semaphore using SemLock to make sure they are
+-        # available on this platform. We use the low level object
+-        # _multiprocessing.SemLock to avoid spawning a resource tracker on
+-        # Unix system or changing the default backend.
+-        import tempfile
+-        from _multiprocessing import SemLock
+-
+-        _rand = tempfile._RandomNameSequence()
+-        for i in range(100):
+-            try:
+-                name = '/joblib-{}-{}' .format(
+-                    os.getpid(), next(_rand))
+-                _sem = SemLock(0, 0, 1, name=name, unlink=True)
+-                del _sem  # cleanup
+-                break
+-            except FileExistsError as e:  # pragma: no cover
+-                if i >= 99:
+-                    raise FileExistsError(
+-                        'cannot find name for semaphore') from e
+-    except (FileExistsError, AttributeError, ImportError, OSError) as e:
+-        mp = None
+-        warnings.warn('%s.  joblib will operate in serial mode' % (e,))
++#if mp is not None:
++#    try:
++#        # try to create a named semaphore using SemLock to make sure they are
++#        # available on this platform. We use the low level object
++#        # _multiprocessing.SemLock to avoid spawning a resource tracker on
++#        # Unix system or changing the default backend.
++#        import tempfile
++#        from _multiprocessing import SemLock
++#
++#        _rand = tempfile._RandomNameSequence()
++#        for i in range(100):
++#            try:
++#                name = '/joblib-{}-{}' .format(
++#                    os.getpid(), next(_rand))
++#                _sem = SemLock(0, 0, 1, name=name, unlink=True)
++#                del _sem  # cleanup
++#                break
++#            except FileExistsError as e:  # pragma: no cover
++#                if i >= 99:
++#                    raise FileExistsError(
++#                        'cannot find name for semaphore') from e
++#    except (FileExistsError, AttributeError, ImportError, OSError) as e:
++#        mp = None
++#        warnings.warn('%s.  joblib will operate in serial mode' % (e,))
+ 
+ 
+ # 3rd stage: backward compat for the assert_spawning helper
+Common subdirectories: lib/python3.8/site-packages/joblib/__pycache__ and joblib/__pycache__
+Common subdirectories: lib/python3.8/site-packages/joblib/test and joblib/test
