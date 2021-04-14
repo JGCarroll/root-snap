@@ -4,7 +4,7 @@ summary: Analyzing petabytes of data, scientifically.
 description: |
   https://root.cern
 
-  This snap is intended to provide an easy-to-install package of the ROOT framework for the home user. It comes bundled along with Python 3.8/PyROOT and Jupyter/JupyROOT notebook capability. NumPy, SciPy, Pandas, Matplotlib and Tensorflow/Keras are bundled with the Python environments.
+  This snap is intended to provide an easy-to-install package of the ROOT framework for the home user. It comes bundled along with Python 3.8/PyROOT and Jupyter/JupyROOT notebook capability. NumPy, SciPy, Pandas, Matplotlib, Scikit-learn and Tensorflow/Keras are bundled with the Python environments.
 
   Snaps are container packages for easy application deployment, designed to be consistent and reliable across different host distributions. They additionally impose some strong sandboxing for security. One caveat of this sandboxing is that this package can only read/write to your `$HOME` directory, or via specific network protocols. It is highly advised that you place all your data files in your `$HOME` directory to be accessible. 
   
@@ -172,10 +172,12 @@ parts:
       - tensorflow
       - keras
       - numpy
+      - scikit-learn
     override-build: |
       snapcraftctl build
       rm $SNAPCRAFT_PART_INSTALL/lib64
       patch -d $SNAPCRAFT_PART_INSTALL -i $SNAPCRAFT_PROJECT_DIR/patches/notebook/checkpoints.patch -p0
+      patch -d $SNAPCRAFT_PART_INSTALL -i $SNAPCRAFT_PROJECT_DIR/patches/joblib/shm_multiprocessing.patch -p0
 
 environment:
   PYTHONPATH: ${SNAP}/usr/local/lib:${SNAP}/usr/lib/python3/dist-packages

@@ -8,5 +8,5 @@ They should be considered to have the license of their respective upstream proje
 | --- | --- |
 | ROOT | [LGPL2.1](https://github.com/root-project/root/blob/master/LICENSE) |
 | Notebook | [BSD 3 Clause](https://github.com/jupyter/jupyter/blob/master/LICENSE) |
-
+| Joblib | [BSD 3 Clause](https://github.com/joblib/joblib/blob/master/LICENSE.txt) |
 
