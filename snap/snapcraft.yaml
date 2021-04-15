@@ -25,6 +25,7 @@ parts:
   root:
     plugin: cmake
     source: https://github.com/root-project/root.git
+    source-tag: v6-24-00
     cmake-parameters: 
       - -DCMAKE_CXX_STANDARD=17
     build-snaps:
@@ -169,9 +170,9 @@ parts:
       - matplotlib
       - metakernel
       - jupyter
-      - tensorflow
-      - keras
-      - numpy
+      - tensorflow ~=2.4.1
+      - keras ~= 2.3.1
+      - numpy ~=1.19.2
       - scikit-learn
     override-build: |
       snapcraftctl build
