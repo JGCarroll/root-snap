@@ -1,0 +1,99 @@
+diff -Naur root/main/python/cmdLineUtils.py python/cmdLineUtils.py
+--- root/main/python/cmdLineUtils.py	2021-04-26 17:20:59.396537278 +0100
++++ python/cmdLineUtils.py	2021-04-26 17:16:49.428866030 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env @python@
++#!/usr/bin/env python3
+ 
+ # ROOT command line tools module: cmdLineUtils
+ # Author: Julien Ripoche
+diff -Naur root/main/python/rootbrowse.py python/rootbrowse.py
+--- root/main/python/rootbrowse.py	2021-04-26 17:20:59.396537278 +0100
++++ python/rootbrowse.py	2021-04-26 17:16:49.428866030 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env @python@
++#!/usr/bin/env python3
+ 
+ # ROOT command line tools: rootbrowse
+ # Author: Julien Ripoche
+diff -Naur root/main/python/rootcp.py python/rootcp.py
+--- root/main/python/rootcp.py	2021-04-26 17:20:59.396537278 +0100
++++ python/rootcp.py	2021-04-26 17:16:49.428866030 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env @python@
++#!/usr/bin/env python3
+ 
+ # ROOT command line tools: rootcp
+ # Author: Julien Ripoche
+diff -Naur root/main/python/rootdrawtree.py python/rootdrawtree.py
+--- root/main/python/rootdrawtree.py	2021-04-26 17:20:59.396537278 +0100
++++ python/rootdrawtree.py	2021-04-26 17:16:49.428866030 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env @python@
++#!/usr/bin/env python3
+ 
+ # ROOT command line tools: rootdrawtree
+ # Author: Luca Giommi
+diff -Naur root/main/python/rooteventselector.py python/rooteventselector.py
+--- root/main/python/rooteventselector.py	2021-04-26 17:20:59.396537278 +0100
++++ python/rooteventselector.py	2021-04-26 17:16:49.428866030 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env @python@
++#!/usr/bin/env python3
+ 
+ # ROOT command line tools: rooteventselector
+ # Author: Julien Ripoche
+diff -Naur root/main/python/rootls.py python/rootls.py
+--- root/main/python/rootls.py	2021-04-26 17:20:59.396537278 +0100
++++ python/rootls.py	2021-04-26 17:16:49.428866030 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env @python@
++#!/usr/bin/env python3
+ 
+ # ROOT command line tools: rootls
+ # Author: Julien Ripoche
+diff -Naur root/main/python/rootmkdir.py python/rootmkdir.py
+--- root/main/python/rootmkdir.py	2021-04-26 17:20:59.396537278 +0100
++++ python/rootmkdir.py	2021-04-26 17:16:49.428866030 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env @python@
++#!/usr/bin/env python3
+ 
+ # ROOT command line tools: rootmkdir
+ # Author: Julien Ripoche
+diff -Naur root/main/python/rootmv.py python/rootmv.py
+--- root/main/python/rootmv.py	2021-04-26 17:20:59.396537278 +0100
++++ python/rootmv.py	2021-04-26 17:16:49.428866030 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env @python@
++#!/usr/bin/env python3
+ 
+ # ROOT command line tools: rootmv
+ # Author: Julien Ripoche
+diff -Naur root/main/python/rootprint.py python/rootprint.py
+--- root/main/python/rootprint.py	2021-04-26 17:20:59.396537278 +0100
++++ python/rootprint.py	2021-04-26 17:16:49.428866030 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env @python@
++#!/usr/bin/env python3
+ 
+ # ROOT command line tools: rootprint
+ # Author: Julien Ripoche
+diff -Naur root/main/python/rootrm.py python/rootrm.py
+--- root/main/python/rootrm.py	2021-04-26 17:20:59.396537278 +0100
++++ python/rootrm.py	2021-04-26 17:16:49.428866030 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env @python@
++#!/usr/bin/env python3
+ 
+ # ROOT command line tools: rootrm
+ # Author: Julien Ripoche
+diff -Naur root/main/python/rootslimtree.py python/rootslimtree.py
+--- root/main/python/rootslimtree.py	2021-04-26 17:20:59.396537278 +0100
++++ python/rootslimtree.py	2021-04-26 17:16:49.428866030 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env @python@
++#!/usr/bin/env python3
+ 
+ # ROOT command line tools: rootslimtree
+ # Author: Lawrence Lee via Julien Ripoche's rooteventselector

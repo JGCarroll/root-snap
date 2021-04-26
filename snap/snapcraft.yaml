@@ -148,6 +148,7 @@ parts:
         snapcraftctl set-version "$(git rev-parse --short HEAD).$(date -u +%d-%m-%y)"
       fi
       patch -i $SNAPCRAFT_PROJECT_DIR/patches/ROOT/ACliC.patch -p 1
+      patch -i $SNAPCRAFT_PROJECT_DIR/patches/ROOT/cli_tools_pyenv_fix.patch -p 1
     override-prime: |
       snapcraftctl prime
       cd $SNAPCRAFT_PRIME/usr/bin
