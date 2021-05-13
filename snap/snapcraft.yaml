@@ -175,6 +175,10 @@ parts:
       - keras ~= 2.3.1
       - numpy ~=1.19.2
       - scikit-learn
+      - numba
+    stage-packages:
+      - libgomp1
+      - libtbb2
     override-build: |
       snapcraftctl build
       rm $SNAPCRAFT_PART_INSTALL/lib64
