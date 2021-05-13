@@ -173,7 +173,11 @@ parts:
       - keras ~=2.3.1
       - numpy ~=1.19.2
       - scikit-learn
-    override-build: | # Workaround bug where lib64 is defined as a symlink and hence conflicts with root part
+      - numba
+    stage-packages:
+      - libgomp1
+      - libtbb2
+    override-build: |
       snapcraftctl build
       rm $SNAPCRAFT_PART_INSTALL/lib64
       patch -d $SNAPCRAFT_PART_INSTALL -i $SNAPCRAFT_PROJECT_DIR/patches/notebook/checkpoints.patch -p0
