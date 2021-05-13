@@ -21,12 +21,22 @@ architectures:
 adopt-info: root
 compression: lzo
 
+package-repositories:
+  - type: apt
+    url: https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/
+    key-id: AE09FE4BBD223A84B2CCFCE3F60F4B3D7FA2AF80
+
 parts:
   root:
     plugin: cmake
     source: https://github.com/root-project/root.git
     cmake-parameters: 
       - -DCMAKE_CXX_STANDARD=17
+      - -DCMAKE_CUDA_COMPILER=/usr/local/cuda/bin/nvcc
+      - -DCMAKE_CUDA_STANDARD=17
+      - -Dcuda=ON
+      - -Dcudnn=OFF
+      - -Dtmva-gpu=ON
     build-snaps:
       - cmake
     build-packages:
@@ -58,6 +68,7 @@ parts:
       - libglew-dev
       - davix-dev
       - libgl2ps-dev
+      - cuda-toolkit-11-3
     stage-packages:
       - g++
       - libafterimage0
@@ -132,6 +143,8 @@ parts:
       - libpythia8v5
       - python3-dev
       - curl
+      - cuda-libraries-11-3
+      - cuda-libraries-dev-11-3
     organize:
       usr/lib/*-linux-gnu/blas/*: usr/lib/
       usr/lib/*-linux-gnu/lapack/*: usr/lib/
@@ -201,6 +214,7 @@ environment:
   MATPLOTLIBRC: ${SNAP}/etc/matplotlibrc
   XAUTHORITY: ${SNAP_REAL_HOME}/.Xauthority
   LANG: C.UTF-8
+  ROOT_INCLUDE_PATH: $SNAP/usr/local/cuda-11.2/include:$SNAP/usr/include
 
 
 layout:
