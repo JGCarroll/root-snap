@@ -148,6 +148,7 @@ parts:
       fi
       patch -i $SNAPCRAFT_PROJECT_DIR/patches/ROOT/ACliC.patch -p 1
       patch -i $SNAPCRAFT_PROJECT_DIR/patches/ROOT/cli_tools_pyenv_fix.patch -p 1
+      patch -i $SNAPCRAFT_PROJECT_DIR/patches/ROOT/GetHomeDirectory_prefer_home.patch -p 1
     override-prime: |
       snapcraftctl prime
       cd $SNAPCRAFT_PRIME/usr/bin
@@ -182,18 +183,6 @@ parts:
       rm $SNAPCRAFT_PART_INSTALL/lib64
       patch -d $SNAPCRAFT_PART_INSTALL -i $SNAPCRAFT_PROJECT_DIR/patches/notebook/checkpoints.patch -p0
       patch -d $SNAPCRAFT_PART_INSTALL -i $SNAPCRAFT_PROJECT_DIR/patches/joblib/shm_multiprocessing.patch -p0
-
-  homeishome: # Wrap around calls to determine $HOME to return the correct variable
-    plugin: make
-    source: https://github.com/ericpruitt/homeishome.git
-    source-commit: bc5fbcf4f8a974636f38c106142e9ffbc2902019
-    make-parameters:
-      - BIN=${SNAPCRAFT_PART_INSTALL}
-      - LIB=${SNAPCRAFT_PART_INSTALL}
-      - all
-    organize:
-      homeishome.so: lib/homeishome.so
-      homeishome: bin/homeishome
 
 environment:
   PYTHONPATH: ${SNAP}/usr/local/lib:${SNAP}/usr/lib/python3/dist-packages

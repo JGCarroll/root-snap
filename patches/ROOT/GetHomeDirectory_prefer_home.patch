@@ -1,0 +1,19 @@
+--- root/core/unix/src/TUnixSystem.cxx	2021-05-13 09:39:03.976085481 +0100
++++ TUnixSystem.cxx	2021-05-13 09:38:58.691974516 +0100
+@@ -3933,12 +3933,12 @@
+       if (mydir[0])
+          return mydir;
+       pw = getpwuid(getuid());
+-      if (pw && pw->pw_dir) {
+-         strncpy(mydir, pw->pw_dir, kMAXPATHLEN-1);
++      if (gSystem->Getenv("HOME")) {
++         strncpy(mydir, gSystem->Getenv("HOME"), kMAXPATHLEN-1);
+          mydir[kMAXPATHLEN-1] = '\0';
+          return mydir;
+-      } else if (gSystem->Getenv("HOME")) {
+-         strncpy(mydir, gSystem->Getenv("HOME"), kMAXPATHLEN-1);
++      } else if (pw && pw->pw_dir) {
++         strncpy(mydir, pw->pw_dir, kMAXPATHLEN-1);
+          mydir[kMAXPATHLEN-1] = '\0';
+          return mydir;
+       }
