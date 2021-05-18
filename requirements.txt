@@ -1,0 +1,14 @@
+# This file controls the bundled python packages
+# It can be modified freely, as well as augmented with specific versions of packages if desired
+# For other packages bundled with the snap, look in snap/snapcraft.yaml directly
+
+scipy
+pandas
+matplotlib
+metakernel
+jupyter
+tensorflow
+keras
+numpy
+scikit-learn
+numba
