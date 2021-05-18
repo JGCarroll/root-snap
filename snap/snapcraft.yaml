@@ -164,17 +164,7 @@ parts:
   python-modules:
     plugin: python
     source: extras/ # Defined above, will effectively no-op as it should deduplicate with extras part
-    python-packages: 
-      - scipy
-      - pandas
-      - matplotlib
-      - metakernel
-      - jupyter
-      - tensorflow ~=2.4.1
-      - keras ~=2.3.1
-      - numpy ~=1.19.2
-      - scikit-learn
-      - numba
+    requirements: ["$SNAPCRAFT_PROJECT_DIR/requirements.txt"]
     stage-packages:
       - libgomp1
       - libtbb2
