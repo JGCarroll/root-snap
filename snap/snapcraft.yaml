@@ -175,6 +175,7 @@ parts:
       patch -d $SNAPCRAFT_PART_INSTALL -i $SNAPCRAFT_PROJECT_DIR/patches/joblib/shm_multiprocessing.patch -p0
 
 environment:
+  PATH: ${SNAP}/usr/local/bin:${PATH}
   PYTHONPATH: ${SNAP}/usr/local/lib:${SNAP}/usr/lib/python3/dist-packages
   LD_LIBRARY_PATH: ${SNAP}/usr/local/lib
   CLING_STANDARD_PCH: none
