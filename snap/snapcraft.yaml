@@ -266,18 +266,6 @@ apps:
      - desktop
      - desktop-legacy
      - removable-media
-  memprobe:
-    command: usr/local/bin/memprobe
-    command-chain: 
-     - bin/setup-sandbox.sh
-    plugs:
-     - home
-     - network
-     - opengl
-     - x11
-     - desktop
-     - desktop-legacy
-     - removable-media
   prepareHistFactory:
     command: usr/local/bin/prepareHistFactory
     command-chain: 
