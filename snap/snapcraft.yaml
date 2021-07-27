@@ -164,7 +164,7 @@ parts:
   python-modules:
     plugin: python
     source: extras/ # Defined above, will effectively no-op as it should deduplicate with extras part
-    requirements: ["$SNAPCRAFT_PROJECT_DIR/requirements.txt"]
+    requirements: ["requirements.txt"]
     stage-packages:
       - libgomp1
       - libtbb2
