@@ -145,8 +145,8 @@ parts:
         snapcraftctl set-grade devel
         snapcraftctl set-version "$(git rev-parse --short HEAD).$(date -u +%d-%m-%y)"
       fi
-      patch -i $SNAPCRAFT_PROJECT_DIR/patches/ROOT/ACliC.patch -p 1
-      patch -i $SNAPCRAFT_PROJECT_DIR/patches/ROOT/cli_tools_pyenv_fix.patch -p 1
+      patch -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/ROOT/ACliC.patch -p 1
+      patch -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/ROOT/cli_tools_pyenv_fix.patch -p 1
     override-prime: |
       snapcraftctl prime
       cd $SNAPCRAFT_PRIME/usr/bin
@@ -162,15 +162,15 @@ parts:
   python-modules:
     plugin: python
     source: extras/ # Defined above, will effectively no-op as it should deduplicate with extras part
-    requirements: ["requirements.txt"]
+    requirements: ["${SNAPCRAFT_PROJECT_DIR}/snap/local/requirements.txt"]
     stage-packages:
       - libgomp1
       - libtbb2
     override-build: |
       snapcraftctl build
       rm $SNAPCRAFT_PART_INSTALL/lib64
-      patch -d $SNAPCRAFT_PART_INSTALL -i $SNAPCRAFT_PROJECT_DIR/patches/notebook/checkpoints.patch -p0
-      patch -d $SNAPCRAFT_PART_INSTALL -i $SNAPCRAFT_PROJECT_DIR/patches/joblib/shm_multiprocessing.patch -p0
+      patch -d $SNAPCRAFT_PART_INSTALL -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/notebook/checkpoints.patch -p0
+      patch -d $SNAPCRAFT_PART_INSTALL -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/joblib/shm_multiprocessing.patch -p0
 
 environment:
   PATH: ${SNAP}/usr/local/bin:${PATH}
