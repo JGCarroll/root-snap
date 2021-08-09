@@ -131,6 +131,7 @@ parts:
       - libpythia8v5
       - python3-dev
       - curl
+      - build-essential
     organize:
       usr/lib/*-linux-gnu/blas/*: usr/lib/
       usr/lib/*-linux-gnu/lapack/*: usr/lib/
