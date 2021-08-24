@@ -57,6 +57,7 @@ parts:
       - libglew-dev
       - davix-dev
       - libgl2ps-dev
+      - nlohmann-json3-dev
     stage-packages:
       - g++
       - libafterimage0
@@ -132,6 +133,7 @@ parts:
       - python3-dev
       - curl
       - make
+      - nlohmann-json3-dev
     organize:
       usr/lib/*-linux-gnu/blas/*: usr/lib/
       usr/lib/*-linux-gnu/lapack/*: usr/lib/
