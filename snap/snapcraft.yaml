@@ -23,7 +23,7 @@ parts:
   root:
     plugin: cmake
     source: https://github.com/root-project/root.git
-    source-tag: v6-24-02
+    source-tag: v6-24-04
     cmake-parameters: 
       - -DCMAKE_CXX_STANDARD=17
     build-snaps:
