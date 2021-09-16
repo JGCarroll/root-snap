@@ -1,0 +1,32 @@
+name: Manually triggered build & release
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Name of the Git branch to build.'     
+        required: true
+        default: 'main'
+      release-channel:
+        description: 'Channel on the Snap Store to push to (e.g: latest/stable/bug-fix)'
+        required: true
+        default: 'latest/candidate'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref:  ${{ github.event.inputs.branch }}
+    - uses: snapcore/action-build@v1
+      id: build
+    - uses: snapcore/action-publish@v1
+      with:
+        store_login: ${{ secrets.STORE_LOGIN }}
+        snap: ${{ steps.build.outputs.snap }}
+        release: ${{ github.event.inputs.release-channel }}
+    - uses: actions/upload-artifact@v2
+      with:
+        name: 'snap'
+        path: ${{ steps.build.outputs.snap}}
