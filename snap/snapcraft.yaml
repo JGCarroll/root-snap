@@ -63,6 +63,7 @@ parts:
       - libgl2ps-dev
       - nlohmann-json3-dev
     stage-packages:
+      - cmake
       - g++
       - libafterimage0
       - libasn1-8-heimdal
@@ -156,6 +157,20 @@ parts:
       patch -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/ROOT/ACliC.patch -p 1
       patch -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/ROOT/cli_tools_pyenv_fix.patch -p 1
       patch -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/ROOT/GetHomeDirectory_prefer_home.patch -p 1
+    override-build: |
+      snapcraftctl build
+      
+      # Correct CMake containing references to the build environment
+      for file in $(grep "/root/parts/root/install\|/root/parts/root/build\|/root/stage" ${SNAPCRAFT_PART_INSTALL}/usr/local/cmake -r -I | cut -d ":" -f 1 | uniq); do
+        sed -i 's!/root/parts/root/install!/snap/root-framework/current!g' $file
+        sed -i 's!/root/parts/root/build!/snap/root-framework/current!g' $file
+        sed -i 's!/root/stage!/snap/root-framework/current!g' $file
+      done
+      
+      # Prevent use of -isystem in CMake configuration because it breaks "#include_next"
+      for file in $(grep "isystem" ${SNAPCRAFT_PART_INSTALL}/usr/local/cmake -r -I | cut -d ":" -f 1 | uniq); do
+        sed -i 's!\-isystem!\-I!g' $file
+      done
     override-prime: |
       snapcraftctl prime
       cd $SNAPCRAFT_PRIME/usr/bin
@@ -191,7 +206,7 @@ environment:
   SHLIB_PATH: ${ThisVarIntentionallyDoesNotExistRabbitCake}
   LIBPATH: ${ThisVarIntentionallyDoesNotExistRabbitCake}
   MANPATH: ${ThisVarIntentionallyDoesNotExistRabbitCake}
-  CMAKE_PREFIX_PATH: ${ThisVarIntentionallyDoesNotExistRabbitCake}
+  CMAKE_PREFIX_PATH: ${SNAP}
   JUPYTER_PATH: ${ThisVarIntentionallyDoesNotExistRabbitCake}
   JUPYTER_CONFIG_DIR: ${ThisVarIntentionallyDoesNotExistRabbitCake}
   ROOTSYS: ${SNAP}/usr/local
@@ -337,3 +352,15 @@ apps:
     command: usr/local/bin/proofserv.exe
     command-chain:
      - bin/setup-sandbox.sh
+  cmake:
+    command: usr/bin/cmake
+    command-chain:
+      - bin/setup-sandbox.sh
+  make:
+    command: usr/bin/make
+    command-chain:
+      - bin/setup-sandbox.sh
+  run:
+    command: bin/run.sh
+    command-chain:
+      - bin/setup-sandbox.sh
