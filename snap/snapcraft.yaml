@@ -4,20 +4,36 @@ summary: Analyzing petabytes of data, scientifically.
 description: |
   https://root.cern
 
-  This snap is intended to provide an easy-to-install package of the ROOT framework for home users and students. This package is ideal for users who are looking for an easy installation process that is consistent across systems without the need for integration with other frameworks, IDE's, or external packages. For these use-cases, you may want to take a look at other available builds of ROOT at https://root.cern/install/
-
-  Snaps are container packages for easy application deployment, designed to be consistent and reliable across different host distributions. They additionally impose some strong sandboxing for security. One caveat of this sandboxing is that this package can only read/write to your `$HOME` directory, or via specific network protocols. It is highly advised that you place all your data files in your `$HOME` directory to be accessible. 
+  This snap is intended to provide an easy-to-install package of the ROOT framework for home users and students.
+  This package is ideal for users who are looking for an easy installation process that is consistent across systems without the need for integration with other frameworks, IDE's, or external packages.
+  For these use-cases, you may want to take a look at other available builds of ROOT at https://root.cern/install/
   
-  Because snaps are containers and don't affect the host system, using PyROOT with `import ROOT` will not work in a system Python shell. Users are encouraged to use the command `pyroot` to access the containers' Python shell, where `import ROOT` would become available. Scripts can be passed to `pyroot` to be executed in PyROOTs context, E.G, `pyroot ./myScript.py`, or put in the scripts shebang. E.G `#!/snap/bin/pyroot`
+  Snaps are container packages for easy application deployment, designed to be consistent and reliable across different host distributions.
+  They additionally impose some strong sandboxing for security. One caveat of this sandboxing is that this package can only read/write to your `$HOME` directory, or via specific network protocols.
+  It is highly advised that you place all your data files in your `$HOME` directory to be accessible.
   
+  Because snaps are containers and don't affect the host system, using PyROOT with `import ROOT` will not work in a system Python shell.
+  Users are encouraged to use the command `pyroot` to access the containers' Python shell, where `import ROOT` would become available.
+  Scripts can be passed to `pyroot` to be executed in PyROOTs context, E.G, `pyroot ./myScript.py`, or put in the scripts shebang. E.G `#!/snap/bin/pyroot`
+    
   JupyROOT can be accessed by running `root --notebook`.
-
-  For user convenience, application entries for ROOT and PyROOT will be placed into the systems start menu by default. 
+  
+  For user convenience, application entries for ROOT and PyROOT will be placed into the systems start menu by default.
 
 confinement: strict
 license: LGPL-2.1+ AND GPL-3.0
 adopt-info: root
 compression: lzo
+
+contact:
+  - eloquism@gmail.com
+  - root-dev@cern.ch
+  - https://root-forum.cern.ch/
+issues:
+  - https://github.com/MrCarroll/root-snap/issues
+  - https://github.com/root-project/root/issues
+source-code: https://github.com/MrCarroll/root-snap
+website: https://root.cern
 
 parts:
   root:
