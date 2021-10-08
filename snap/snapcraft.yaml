@@ -24,6 +24,9 @@ confinement: strict
 license: LGPL-2.1+ AND GPL-3.0
 adopt-info: root
 compression: lzo
+assumes:
+  - snap-env
+  - command-chain
 
 parts:
   root:
