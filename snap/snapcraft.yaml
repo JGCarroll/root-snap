@@ -32,7 +32,7 @@ parts:
   root:
     plugin: cmake
     source: https://github.com/root-project/root.git
-    source-tag: v6-22-08
+    source-commit: 5cf7b301866777bd24c666d4c6d4897a733a92b4 # 6-22-08
     cmake-parameters: 
       - -DCMAKE_CXX_STANDARD=17
     build-packages:
