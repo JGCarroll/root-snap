@@ -1,4 +1,4 @@
-name: Manually triggered build & release
+name: Build and Deploy
 
 on:
   workflow_dispatch:
@@ -10,7 +10,10 @@ on:
       release-channel:
         description: 'Channel on the Snap Store to push to (e.g: latest/stable/bug-fix)'
         required: true
-        default: 'latest/candidate'
+        default: 'latest/beta'
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -18,15 +21,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        ref:  ${{ github.event.inputs.branch }}
+        ref:  ${{ github.event.inputs.branch || 'main' }}
     - uses: snapcore/action-build@v1
       id: build
+    - uses: actions/upload-artifact@v2
+      with:
+        name: 'root-framework.snap'
+        path: ${{ steps.build.outputs.snap}}
     - uses: snapcore/action-publish@v1
       with:
         store_login: ${{ secrets.STORE_LOGIN }}
         snap: ${{ steps.build.outputs.snap }}
-        release: ${{ github.event.inputs.release-channel }}
-    - uses: actions/upload-artifact@v2
-      with:
-        name: 'snap'
-        path: ${{ steps.build.outputs.snap}}
+        release: ${{ github.event.inputs.release-channel || 'latest/beta' }}
+
