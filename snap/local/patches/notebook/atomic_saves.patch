@@ -1,0 +1,11 @@
+--- lib/python3.8/site-packages/notebook/services/contents/fileio.py	2022-03-02 09:12:01.000000000 +0000
++++ fileio.py	2022-03-03 11:52:04.998254688 +0000
+@@ -57,7 +57,7 @@
+ 
+     The .~ prefix will make Dropbox ignore the temporary file.'''
+     dirname, basename = os.path.split(path)
+-    return os.path.join(dirname, '.~'+basename)
++    return os.path.join(dirname, basename+'.atomic.tmp')
+ 
+ def path_to_invalid(path):
+     '''Name of invalid file after a failed atomic write and subsequent read.'''
