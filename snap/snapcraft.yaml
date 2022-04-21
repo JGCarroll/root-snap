@@ -236,6 +236,8 @@ plugs:
   desktop:
   desktop-legacy:
   removable-media:
+  shared-memory:
+    private: true
 
 apps:
   root-framework:
