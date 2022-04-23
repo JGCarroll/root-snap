@@ -198,7 +198,8 @@ parts:
 
 environment:
   PATH: ${SNAP}/usr/local/bin:${PATH}
-  PYTHONPATH: ${SNAP}/usr/local/lib:${SNAP}/usr/lib/python3/dist-packages
+  PIP_TARGET: ${SNAP_USER_COMMON}/.pip
+  PYTHONPATH: ${SNAP}/usr/local/lib:${SNAP}/usr/lib/python3/dist-packages:${SNAP_USER_COMMON}/.pip
   LD_LIBRARY_PATH: ${SNAP}/usr/local/lib
   CLING_STANDARD_PCH: none
   old_rootsys: ${ThisVarIntentionallyDoesNotExistRabbitCake}
@@ -214,7 +215,6 @@ environment:
   MATPLOTLIBRC: ${SNAP}/etc/matplotlibrc
   XAUTHORITY: ${SNAP_REAL_HOME}/.Xauthority
   LANG: C.UTF-8
-
 
 layout:
   /usr/share/libdrm:
@@ -366,4 +366,7 @@ apps:
     command: bin/run.sh
     command-chain:
       - bin/setup-sandbox.sh
-
+  pip:
+    command: bin/pip
+    command-chain:
+      - bin/setup-sandbox.sh
