@@ -200,7 +200,7 @@ parts:
 environment:
   PATH: ${SNAP}/usr/local/bin:${PATH}
   PIP_TARGET: ${SNAP_USER_COMMON}/.pip
-  PYTHONPATH: ${SNAP}/usr/local/lib:${SNAP}/usr/lib/python3/dist-packages:${SNAP_USER_COMMON}/.pip
+  PYTHONPATH: ${SNAP}/usr/local/lib:${SNAP_USER_COMMON}/.pip
   LD_LIBRARY_PATH: ${SNAP}/usr/local/lib
   CLING_STANDARD_PCH: none
   old_rootsys: ${ThisVarIntentionallyDoesNotExistRabbitCake}
