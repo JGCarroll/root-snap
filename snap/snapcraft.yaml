@@ -157,6 +157,7 @@ parts:
       fi
       patch -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/ROOT/ACliC.patch -p 1
       patch -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/ROOT/cli_tools_pyenv_fix.patch -p 1
+      git cherry-pick 8c22e4b9985246fa8ea39fdac0c33822c865c2c3 # XROOTD hash mismatch
     override-build: |
       snapcraftctl build
       
