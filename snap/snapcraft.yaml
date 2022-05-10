@@ -195,6 +195,7 @@ parts:
       rm $SNAPCRAFT_PART_INSTALL/lib64
       patch -d $SNAPCRAFT_PART_INSTALL -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/notebook/checkpoints.patch -p0
       patch -d $SNAPCRAFT_PART_INSTALL -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/notebook/atomic_saves.patch -p0
+      patch -d $SNAPCRAFT_PART_INSTALL -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/notebook/disable_file_redirect.patch -p0
 
 environment:
   PATH: ${SNAP}/usr/local/bin:${PATH}
