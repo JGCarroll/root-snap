@@ -32,7 +32,7 @@ parts:
   root:
     plugin: cmake
     source: https://github.com/root-project/root.git
-    source-commit: 54807d9b7051c0e88d7074c9d2205bbd884e0210 #v6.26.2
+    source-commit: 82fc2dc7e13477e717020c761e227ed4e3f7012e #v6.26.4
     cmake-parameters: 
       - -DCMAKE_CXX_STANDARD=17
     build-packages:
@@ -157,7 +157,6 @@ parts:
       fi
       patch -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/ROOT/ACliC.patch -p 1
       patch -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/ROOT/cli_tools_pyenv_fix.patch -p 1
-      git cherry-pick 8c22e4b9985246fa8ea39fdac0c33822c865c2c3 # XROOTD hash mismatch
     override-build: |
       snapcraftctl build
       
