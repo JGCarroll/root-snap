@@ -225,7 +225,7 @@ layout:
     bind: $SNAP/usr/include
   /usr/share/matplotlib:
     symlink: $SNAP/usr/share/matplotlib
-  /usr/lib/x86_64-linux-gnu/libc_nonshared.a:	# ACLiC
+  /usr/lib/x86_64-linux-gnu/libc_nonshared.a: # ACLiC
     symlink: $SNAP/usr/lib/x86_64-linux-gnu/libc_nonshared.a
     
 plugs:
