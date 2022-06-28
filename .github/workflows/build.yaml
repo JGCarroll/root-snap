@@ -31,6 +31,7 @@ jobs:
     - uses: snapcore/action-publish@v1
       env:
         SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.STORE_LOGIN }}
+      with:
         snap: ${{ steps.build.outputs.snap }}
         release: ${{ github.event.inputs.release-channel || 'latest/beta' }}
 
