@@ -139,6 +139,7 @@ parts:
       - libpythia8v5
       - python3-dev
       - curl
+      - wget
       - make
       - gfortran
     organize:
