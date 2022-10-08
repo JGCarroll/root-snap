@@ -7,17 +7,17 @@ description: |
   This snap is intended to provide an easy-to-install package of the ROOT framework for home users and students.
   This package is ideal for users who are looking for an easy installation process that is consistent across systems without the need for integration with other frameworks, IDE's, or external packages.
   For these use-cases, you may want to take a look at other available builds of ROOT at https://root.cern/install/
-  
+
   Snaps are container packages for easy application deployment, designed to be consistent and reliable across different host distributions.
   They additionally impose some strong sandboxing for security. One caveat of this sandboxing is that this package can only read/write to your `$HOME` directory, or via specific network protocols.
   It is highly advised that you place all your data files in your `$HOME` directory to be accessible.
-  
+
   Because snaps are containers and don't affect the host system, using PyROOT with `import ROOT` will not work in a system Python shell.
   Users are encouraged to use the command `pyroot` to access the containers' Python shell, where `import ROOT` would become available.
   Scripts can be passed to `pyroot` to be executed in PyROOTs context, E.G, `pyroot ./myScript.py`, or put in the scripts shebang. E.G `#!/snap/bin/pyroot`
-  
+
   JupyROOT can be accessed by running `root --notebook`.
-  
+
   For user convenience, application entries for ROOT and PyROOT will be placed into the systems start menu by default.
 
 confinement: strict
@@ -33,7 +33,7 @@ parts:
     plugin: cmake
     source: https://github.com/root-project/root.git
     source-commit: 3b796f86a30e274053669931a24d77a3d36c8f18 # 6-24-06
-    cmake-parameters: 
+    cmake-parameters:
       - -DCMAKE_CXX_STANDARD=17
     build-packages:
       - libx11-dev
@@ -159,14 +159,14 @@ parts:
       patch -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/ROOT/cli_tools_pyenv_fix.patch -p 1
     override-build: |
       snapcraftctl build
-      
+
       # Correct CMake containing references to the build environment
       for file in $(grep "/root/parts/root/install\|/root/parts/root/build\|/root/stage" ${SNAPCRAFT_PART_INSTALL}/usr/local/cmake -r -I | cut -d ":" -f 1 | uniq); do
         sed -i 's!/root/parts/root/install!/snap/root-framework/current!g' $file
         sed -i 's!/root/parts/root/build!/snap/root-framework/current!g' $file
         sed -i 's!/root/stage!/snap/root-framework/current!g' $file
       done
-      
+
       # Prevent use of -isystem in CMake configuration because it breaks "#include_next"
       for file in $(grep "isystem" ${SNAPCRAFT_PART_INSTALL}/usr/local/cmake -r -I | cut -d ":" -f 1 | uniq); do
         sed -i 's!\-isystem!\-I!g' $file
@@ -174,7 +174,7 @@ parts:
     override-prime: |
       snapcraftctl prime
       cd $SNAPCRAFT_PRIME/usr/bin
-      [ ! -f c++ ] && ln -s g++ c++	# ACLiC
+      [ ! -f c++ ] && ln -s g++ c++ # ACLiC
     after:
       [python-modules]
 
@@ -182,7 +182,7 @@ parts:
   extras:
     plugin: dump
     source: extras/
-    
+
   python-modules:
     plugin: python
     source: extras/ # Defined above, will effectively no-op as it should deduplicate with extras part
@@ -241,99 +241,99 @@ plugs:
 apps:
   root-framework:
     command: usr/local/bin/root
-    command-chain: 
+    command-chain:
       - bin/setup-sandbox.sh
   pyroot:
     command: bin/pyroot.sh
-    command-chain: 
+    command-chain:
      - bin/setup-sandbox.sh
   genreflex:
     command: usr/local/bin/genreflex
-    command-chain: 
+    command-chain:
      - bin/setup-sandbox.sh
   hadd:
     command: usr/local/bin/hadd
-    command-chain: 
+    command-chain:
      - bin/setup-sandbox.sh
   hist2workspace:
     command: usr/local/bin/hist2workspace
-    command-chain: 
+    command-chain:
      - bin/setup-sandbox.sh
   memprobe:
     command: usr/local/bin/memprobe
-    command-chain: 
+    command-chain:
      - bin/setup-sandbox.sh
   prepareHistFactory:
     command: usr/local/bin/prepareHistFactory
-    command-chain: 
+    command-chain:
      - bin/setup-sandbox.sh
   proofserv:
     command: usr/local/bin/proofserv
-    command-chain: 
+    command-chain:
      - bin/setup-sandbox.sh
   rmkdepend:
     command: usr/local/bin/rmkdepend
-    command-chain: 
+    command-chain:
      - bin/setup-sandbox.sh
   root-config:
     command: usr/local/bin/root-config
-    command-chain: 
+    command-chain:
      - bin/setup-sandbox.sh
   rootbrowse:
     command: usr/local/bin/rootbrowse
-    command-chain: 
+    command-chain:
      - bin/setup-sandbox.sh
   rootcint:
     command: usr/local/bin/rootcint
-    command-chain: 
+    command-chain:
      - bin/setup-sandbox.sh
   rootcling:
     command: usr/local/bin/rootcling
-    command-chain: 
+    command-chain:
      - bin/setup-sandbox.sh
   rootcp:
     command: usr/local/bin/rootcp
-    command-chain: 
+    command-chain:
      - bin/setup-sandbox.sh
   rootdrawtree:
     command: usr/local/bin/rootdrawtree
-    command-chain: 
+    command-chain:
      - bin/setup-sandbox.sh
   rooteventselector:
     command: usr/local/bin/rooteventselector
-    command-chain: 
+    command-chain:
      - bin/setup-sandbox.sh
   rootls:
     command: usr/local/bin/rootls
-    command-chain: 
+    command-chain:
      - bin/setup-sandbox.sh
   rootmkdir:
     command: usr/local/bin/rootmkdir
-    command-chain: 
+    command-chain:
      - bin/setup-sandbox.sh
   rootmv:
     command: usr/local/bin/rootmv
-    command-chain: 
+    command-chain:
      - bin/setup-sandbox.sh
   rootprint:
     command: usr/local/bin/rootprint
-    command-chain: 
+    command-chain:
      - bin/setup-sandbox.sh
   rootrm:
     command: usr/local/bin/rootrm
-    command-chain: 
+    command-chain:
      - bin/setup-sandbox.sh
   roots:
     command: usr/local/bin/roots
-    command-chain: 
+    command-chain:
      - bin/setup-sandbox.sh
   rootslimtree:
     command: usr/local/bin/rootslimtree
-    command-chain: 
+    command-chain:
      - bin/setup-sandbox.sh
   xpdtest:
     command: usr/local/bin/xpdtest
-    command-chain: 
+    command-chain:
      - bin/setup-sandbox.sh
   root-exe:
     command: usr/local/bin/root.exe
