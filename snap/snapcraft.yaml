@@ -63,6 +63,7 @@ parts:
       - libglew-dev
       - davix-dev
       - libgl2ps-dev
+      - gfortran
     stage-packages:
       - cmake
       - g++
@@ -139,6 +140,7 @@ parts:
       - python3-dev
       - curl
       - make
+      - gfortran
     organize:
       usr/lib/*-linux-gnu/blas/*: usr/lib/
       usr/lib/*-linux-gnu/lapack/*: usr/lib/
