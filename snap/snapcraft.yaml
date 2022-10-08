@@ -175,7 +175,8 @@ parts:
     override-prime: |
       snapcraftctl prime
       cd $SNAPCRAFT_PRIME/usr/bin
-      [ ! -f c++ ] && ln -s g++ c++ # ACLiC
+      if [[ ! -f c++ ]] ; then ln -s g++ c++ ; fi # ACLiC
+      if [[ ! -f cc ]] ; then ln -s gcc cc ; fi # E.G MadGraph
     after:
       [python-modules]
 
