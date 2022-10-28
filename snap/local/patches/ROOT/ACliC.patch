@@ -4,7 +4,7 @@
     mv ${COMPILEDATA}.tmp $COMPILEDATA; fi
  )
  
-+sed -i "s#-isystem${SNAPCRAFT_PART_INSTALL}/usr/include/x86_64-linux-gnu##g" $COMPILEDATA
-+sed -i "s#-isystem${SNAPCRAFT_PART_INSTALL}/usr/include##g" $COMPILEDATA
-+sed -i "s#-isystem${SNAPCRAFT_STAGE}/include##g" $COMPILEDATA
++sed -i "s# -isystem ${SNAPCRAFT_PART_INSTALL}/usr/include/x86_64-linux-gnu##g" $COMPILEDATA
++sed -i "s# -isystem ${SNAPCRAFT_PART_INSTALL}/usr/include##g" $COMPILEDATA
++sed -i "s# -isystem ${SNAPCRAFT_STAGE}/include##g" $COMPILEDATA
  exit 0

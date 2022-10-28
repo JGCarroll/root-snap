@@ -18,6 +18,29 @@
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #SOFTWARE.
 
+#######################################################################################
+# Setup environment variables historically handled in snapcraft.yaml (prior to core22)#
+#######################################################################################
+
+export PATH=${SNAP}/usr/local/bin:${PATH}
+export LD_LIBRARY_PATH=${SNAP}/usr/local/lib:${LD_LIBRARY_PATH}
+export PIP_TARGET=${SNAP_USER_COMMON}/.pip
+export PYTHONPATH=${SNAP}/usr/local/lib:${SNAP_USER_COMMON}/.pip
+export CLING_STANDARD_PCH=none
+unset old_rootsys
+unset DYLD_LIBRARY_PATH
+unset SHLIB_PATH
+unset LIBPATH
+unset MANPATH
+export CMAKE_PREFIX_PATH=${SNAP}
+unset JUPYTER_PATH
+unset JUPYTER_CONFIG_DIR
+export ROOTSYS=${SNAP}/usr/local
+DISABLE_WAYLAND=1
+export MATPLOTLIBRC=${SNAP}/etc/matplotlibrc
+export XAUTHORITY=${SNAP_REAL_HOME}/.Xauthority
+export LANG=C.UTF-8
+
 #################
 # Launcher init #
 #################
