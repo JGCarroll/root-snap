@@ -1,4 +1,4 @@
---- lib/python3.8/site-packages/notebook/notebookapp.py	2022-05-10 19:32:03.548087838 +0100
+--- lib/python3.10/site-packages/notebook/notebookapp.py	2022-05-10 19:32:03.548087838 +0100
 +++ notebookapp.py	2022-05-10 19:34:51.986166943 +0100
 @@ -793,7 +793,7 @@
          help=_("Whether to allow the user to run the notebook as root.")

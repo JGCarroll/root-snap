@@ -1,5 +1,5 @@
 name: root-framework
-base: core20
+base: core22
 summary: Analyzing petabytes of data, scientifically.
 description: |
   https://root.cern
@@ -32,150 +32,95 @@ parts:
   root:
     plugin: cmake
     source: https://github.com/root-project/root.git
+    source-commit: db1e83871f8a34574c4980d94c5e5ab667fa8672 # 6.28.00
     cmake-parameters:
       - -DCMAKE_CXX_STANDARD=17
+      - -Dxrootd=OFF
+      - -Dbuiltin_xrootd=OFF
     build-packages:
-      - libx11-dev
+      - build-essential
+      # headers
       - libxpm-dev
       - libxft-dev
       - libxext-dev
-      - libpython3-dev
       - libssl-dev
+      - gfortran
       - libpcre++-dev
-      - liblzma-dev
-      - libzstd-dev
-      - libxxhash-dev
-      - liblz4-dev
-      - libgif-dev
-      - libtiff-dev
-      - libjpeg-dev
-      - libafterimage-dev
-      - libgsl-dev
-      - libglu1-mesa-dev
-      - libxml2-dev
-      - libsqlite3-dev
+      - xlibmesa-glu-dev
+      - libglew-dev
       - libfftw3-dev
       - libcfitsio-dev
-      - libtbb-dev
-      - libblas-dev
-      - libftgl-dev
-      - libpythia8-dev
-      - libglew-dev
-      - davix-dev
-      - libgl2ps-dev
-      - gfortran
-    stage-packages:
-      - cmake
+      - libgraphviz-dev
+      - libpython3-dev
+      - libxml2-dev
+      - libkrb5-dev
+      # Toolchain
       - g++
-      - libafterimage0
-      - libasn1-8-heimdal
-      - libbrotli1
-      - libcairo-gobject2
-      - libcairo2
-      - libcfitsio8
-      - libcurl3-gnutls
-      - libdatrie1
-      - libfftw3-double3
-      - libfontconfig1
-      - libfreetype6
-      - libfribidi0
-      - libftgl2
-      - libgdk-pixbuf2.0-0
-      - libgl1
-      - libglu1-mesa
-      - libglvnd0
-      - libglx0
-      - libgraphite2-3
-      - libgsl23
-      - libgslcblas0
-      - libgssapi3-heimdal
-      - libharfbuzz0b
-      - libhcrypto4-heimdal
-      - libheimbase1-heimdal
-      - libheimntlm0-heimdal
-      - libhx509-5-heimdal
-      - libicu66
-      - libjbig0
-      - libjpeg-turbo8
-      - libkrb5-26-heimdal
-      - libldap-2.4-2
-      - libnghttp2-14
-      - libopengl0
-      - libpango-1.0-0
-      - libpangocairo-1.0-0
-      - libpangoft2-1.0-0
-      - libpixman-1-0
-      - libpng16-16
-      - libpsl5
-      - libpython3.8
-      - libroken18-heimdal
-      - librsvg2-2
-      - librtmp1
-      - libsasl2-2
-      - libssh-4
-      - libtbb2
-      - libthai0
-      - libtiff5
-      - libwebp6
-      - libwind0-heimdal
-      - libx11-6
-      - libxau6
-      - libxcb-render0
-      - libxcb-shm0
-      - libxcb1
-      - libxdmcp6
-      - libxext6
-      - libxft2
-      - libxml2
+      - gfortran
+      - cmake
+    stage-packages:
+      # Headers
+      - libstdc++-11-dev
+      - libpython3-dev
+      - libxft-dev
+      - libxpm-dev
       - libxpm4
-      - libxrender1
-      - libxxhash0
-      - libblas3
-      - libstdc++-9-dev
-      - libc6-dev
-      - libdavix0v5
-      - libgl2ps1.4
-      - libglew2.1
-      - libpythia8v5
-      - python3-dev
+      - libxext-dev
+      - libssl-dev
+      - libpcre++-dev
+      - xlibmesa-glu-dev
+      - libglew-dev
+      - libfftw3-dev
+      - libcfitsio-dev
+      - libgraphviz-dev
+      - libavahi-compat-libdnssd-dev
+      - libldap2-dev
+      - libpython3-dev
+      - libxml2-dev
+      - libkrb5-dev
+      - libgsl0-dev
+      # Toolchain
+      - gfortran
+      - g++
+      - cmake
+      - make
+      # Libraries
+      - x11-utils
+      - libglu1-mesa
+      # Utilities
       - curl
       - wget
-      - make
-      - gfortran
-    organize:
-      usr/lib/*-linux-gnu/blas/*: usr/lib/
-      usr/lib/*-linux-gnu/lapack/*: usr/lib/
     override-pull: |
-      snapcraftctl pull
+      craftctl default
       minor_version=$(git describe --tags --abbrev=0 | grep -Eo "[0-9]*-[0-9]*-[0-9]*" | cut -d "-" -f 2)
       patch_version=$(git describe --tags --abbrev=0 | grep -Eo "[0-9]*-[0-9]*-[0-9]*" | cut -d "-" -f 3)
       if [ $(( 10#$minor_version % 2 )) -eq 0 ] && [ $(( 10#$patch_version % 2 )) -eq 0 ]
       then
-        snapcraftctl set-grade stable
-        snapcraftctl set-version "$(git describe --tags --abbrev=0)"
+        craftctl set grade=stable
+        craftctl set version="$(git describe --tags --abbrev=0)"
       else
-        snapcraftctl set-grade devel
-        snapcraftctl set-version "$(git rev-parse --short HEAD).$(date -u +%d-%m-%y)"
+        craftctl set grade=devel
+        craftctl set version="$(git rev-parse --short HEAD).$(date -u +%d-%m-%y)"
       fi
-      patch -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/ROOT/ACliC.patch -p 1
-      patch -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/ROOT/cli_tools_pyenv_fix.patch -p 1
+      patch -i $CRAFT_PROJECT_DIR/snap/local/patches/ROOT/ACliC.patch -p 1
+      patch -i $CRAFT_PROJECT_DIR/snap/local/patches/ROOT/cli_tools_pyenv_fix.patch -p 1
     override-build: |
-      snapcraftctl build
+      craftctl default
 
       # Correct CMake containing references to the build environment
-      for file in $(grep "/root/parts/root/install\|/root/parts/root/build\|/root/stage" ${SNAPCRAFT_PART_INSTALL}/usr/local/cmake -r -I | cut -d ":" -f 1 | uniq); do
+      for file in $(grep "/root/parts/root/install\|/root/parts/root/build\|/root/stage" ${CRAFT_PART_INSTALL}/usr/local/cmake -r -I | cut -d ":" -f 1 | uniq); do
         sed -i 's!/root/parts/root/install!/snap/root-framework/current!g' $file
         sed -i 's!/root/parts/root/build!/snap/root-framework/current!g' $file
         sed -i 's!/root/stage!/snap/root-framework/current!g' $file
       done
 
       # Prevent use of -isystem in CMake configuration because it breaks "#include_next"
-      for file in $(grep "isystem" ${SNAPCRAFT_PART_INSTALL}/usr/local/cmake -r -I | cut -d ":" -f 1 | uniq); do
+      for file in $(grep "isystem" ${CRAFT_PART_INSTALL}/usr/local/cmake -r -I | cut -d ":" -f 1 | uniq); do
         sed -i 's!\-isystem!\-I!g' $file
       done
     override-prime: |
-      snapcraftctl prime
-      cd $SNAPCRAFT_PRIME/usr/bin
+      craftctl default
+      cd $CRAFT_PRIME/usr/bin
       if [[ ! -f c++ ]] ; then ln -s g++ c++ ; fi # ACLiC
       if [[ ! -f cc ]] ; then ln -s gcc cc ; fi # E.G MadGraph
     after:
@@ -189,40 +134,27 @@ parts:
   python-modules:
     plugin: python
     source: extras/ # Defined above, will effectively no-op as it should deduplicate with extras part
-    requirements: ["${SNAPCRAFT_PROJECT_DIR}/snap/local/requirements.txt"]
+    python-packages:
+      - scipy
+      - pandas
+      - matplotlib
+      - metakernel
+      - jupyter
+      - tensorflow
+      - keras
+      - numpy
+      - scikit-learn
+      - numba
     stage-packages:
       - libgomp1
       - libtbb2
     override-build: |
-      snapcraftctl build
-      rm $SNAPCRAFT_PART_INSTALL/lib64
-      patch -d $SNAPCRAFT_PART_INSTALL -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/notebook/checkpoints.patch -p0
-      patch -d $SNAPCRAFT_PART_INSTALL -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/notebook/atomic_saves.patch -p0
-      patch -d $SNAPCRAFT_PART_INSTALL -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/notebook/disable_file_redirect.patch -p0
-
-environment:
-  PATH: ${SNAP}/usr/local/bin:${PATH}
-  PIP_TARGET: ${SNAP_USER_COMMON}/.pip
-  PYTHONPATH: ${SNAP}/usr/local/lib:${SNAP_USER_COMMON}/.pip
-  LD_LIBRARY_PATH: ${SNAP}/usr/local/lib
-  CLING_STANDARD_PCH: none
-  old_rootsys: ${ThisVarIntentionallyDoesNotExistRabbitCake}
-  DYLD_LIBRARY_PATH: ${ThisVarIntentionallyDoesNotExistRabbitCake}
-  SHLIB_PATH: ${ThisVarIntentionallyDoesNotExistRabbitCake}
-  LIBPATH: ${ThisVarIntentionallyDoesNotExistRabbitCake}
-  MANPATH: ${ThisVarIntentionallyDoesNotExistRabbitCake}
-  CMAKE_PREFIX_PATH: ${SNAP}
-  JUPYTER_PATH: ${ThisVarIntentionallyDoesNotExistRabbitCake}
-  JUPYTER_CONFIG_DIR: ${ThisVarIntentionallyDoesNotExistRabbitCake}
-  ROOTSYS: ${SNAP}/usr/local
-  DISABLE_WAYLAND: 1
-  MATPLOTLIBRC: ${SNAP}/etc/matplotlibrc
-  XAUTHORITY: ${SNAP_REAL_HOME}/.Xauthority
-  LANG: C.UTF-8
+      craftctl default
+      patch -d $CRAFT_PART_INSTALL -i $CRAFT_PROJECT_DIR/snap/local/patches/notebook/checkpoints.patch -p0
+      patch -d $CRAFT_PART_INSTALL -i $CRAFT_PROJECT_DIR/snap/local/patches/notebook/atomic_saves.patch -p0
+      patch -d $CRAFT_PART_INSTALL -i $CRAFT_PROJECT_DIR/snap/local/patches/notebook/disable_file_redirect.patch -p0
 
 layout:
-  /usr/share/libdrm:
-    symlink: $SNAP/usr/share/libdrm
   /usr/include:
     bind: $SNAP/usr/include
   /usr/share/matplotlib:
@@ -249,111 +181,115 @@ apps:
   pyroot:
     command: bin/pyroot.sh
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   genreflex:
     command: usr/local/bin/genreflex
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   hadd:
     command: usr/local/bin/hadd
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   hist2workspace:
     command: usr/local/bin/hist2workspace
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   prepareHistFactory:
     command: usr/local/bin/prepareHistFactory
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   proofserv:
     command: usr/local/bin/proofserv
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   rmkdepend:
     command: usr/local/bin/rmkdepend
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   root-config:
     command: usr/local/bin/root-config
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   rootbrowse:
     command: usr/local/bin/rootbrowse
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   rootcint:
     command: usr/local/bin/rootcint
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   rootcling:
     command: usr/local/bin/rootcling
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   rootcp:
     command: usr/local/bin/rootcp
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   rootdrawtree:
     command: usr/local/bin/rootdrawtree
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   rooteventselector:
     command: usr/local/bin/rooteventselector
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   rootls:
     command: usr/local/bin/rootls
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   rootmkdir:
     command: usr/local/bin/rootmkdir
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   rootmv:
     command: usr/local/bin/rootmv
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   rootprint:
     command: usr/local/bin/rootprint
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   rootrm:
     command: usr/local/bin/rootrm
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   roots:
     command: usr/local/bin/roots
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   rootslimtree:
     command: usr/local/bin/rootslimtree
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
+  rootreadspeed:
+    command: usr/local/bin/rootreadspeed
+    command-chain:
+      - bin/setup-sandbox.sh
   xpdtest:
     command: usr/local/bin/xpdtest
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   root-exe:
     command: usr/local/bin/root.exe
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   rootn-exe:
     command: usr/local/bin/rootn.exe
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   rootnb-exe:
     command: usr/local/bin/rootnb.exe
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   roots-exe:
     command: usr/local/bin/roots.exe
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   proofserv-exe:
     command: usr/local/bin/proofserv.exe
     command-chain:
-     - bin/setup-sandbox.sh
+      - bin/setup-sandbox.sh
   cmake:
     command: usr/bin/cmake
     command-chain:
