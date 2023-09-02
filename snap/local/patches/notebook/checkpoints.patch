@@ -1,11 +1,11 @@
---- lib/python3.10/site-packages/notebook/services/contents/filecheckpoints.py	2021-04-14 17:39:54.621051563 +0100
-+++ filecheckpoints.py	2021-04-14 17:42:06.405989920 +0100
-@@ -29,7 +29,7 @@
+--- filecheckpoints.py	2023-09-02 16:17:34.818494056 +0100
++++ root/lib/python3.10/site-packages/jupyter_server/services/contents/filecheckpoints.py	2023-09-02 16:32:03.357168874 +0100
+@@ -30,7 +30,7 @@
      """
  
      checkpoint_dir = Unicode(
--        '.ipynb_checkpoints',
-+        os.path.join(os.environ["SNAP_USER_COMMON"], ".ipynb_checkpoints"),
+-        ".ipynb_checkpoints",
++        "/tmp/jupyroot checkpoints",
          config=True,
          help="""The directory name in which to keep file checkpoints
  

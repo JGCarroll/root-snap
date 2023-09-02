@@ -1,11 +1,11 @@
---- lib/python3.10/site-packages/notebook/notebookapp.py	2022-05-10 19:32:03.548087838 +0100
-+++ notebookapp.py	2022-05-10 19:34:51.986166943 +0100
-@@ -793,7 +793,7 @@
-         help=_("Whether to allow the user to run the notebook as root.")
-     )
+--- serverapp.py	2023-09-02 16:17:16.826146476 +0100
++++ root/lib/python3.10/site-packages/jupyter_server/serverapp.py	2023-09-02 16:01:59.539904529 +0100
+@@ -1260,7 +1260,7 @@
+             return not addr.is_loopback
  
--    use_redirect_file = Bool(True, config=True,
-+    use_redirect_file = Bool(False, config=True,
+     use_redirect_file = Bool(
+-        True,
++        False,
+         config=True,
          help="""Disable launching browser by redirect file
- 
-         For versions of notebook > 5.7.2, a security feature measure was added that
+      For versions of notebook > 5.7.2, a security feature measure was added that
