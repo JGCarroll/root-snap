@@ -149,9 +149,9 @@ parts:
       - libtbb2
     override-build: |
       craftctl default
-      patch -d $CRAFT_PART_INSTALL -i $CRAFT_PROJECT_DIR/snap/local/patches/notebook/checkpoints.patch -p0
-      patch -d $CRAFT_PART_INSTALL -i $CRAFT_PROJECT_DIR/snap/local/patches/notebook/atomic_saves.patch -p0
-      patch -d $CRAFT_PART_INSTALL -i $CRAFT_PROJECT_DIR/snap/local/patches/notebook/disable_file_redirect.patch -p0
+      patch -d $CRAFT_PART_INSTALL -i $CRAFT_PROJECT_DIR/snap/local/patches/notebook/checkpoints.patch -p1
+      patch -d $CRAFT_PART_INSTALL -i $CRAFT_PROJECT_DIR/snap/local/patches/notebook/atomic_saves.patch -p1
+      patch -d $CRAFT_PART_INSTALL -i $CRAFT_PROJECT_DIR/snap/local/patches/notebook/disable_file_redirect.patch -p1
 
 layout:
   /usr/include:
