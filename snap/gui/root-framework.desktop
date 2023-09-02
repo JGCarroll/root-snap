@@ -2,7 +2,7 @@
 Name=ROOT
 Comment="An open-source data analysis framework used by high energy physics and others."
 Exec=root-framework
-Icon=${SNAP}/meta/gui/root-framework.png
+Icon=${SNAP}/meta/gui/root.png
 Type=Application
 Terminal=true
 Categories=Science;

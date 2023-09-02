@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=JupyROOT
+Comment="Jupyter Notebook environment for ROOT"
+Exec=root-framework --notebook
+Icon=${SNAP}/meta/gui/root.png
+Type=Application
+Terminal=true
+Categories=Science;
+

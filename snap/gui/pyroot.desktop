@@ -2,7 +2,7 @@
 Name=PyROOT
 Comment="An open-source data analysis framework used by high energy physics and others."
 Exec=root-framework.pyroot
-Icon=${SNAP}/meta/gui/pyroot.png
+Icon=${SNAP}/meta/gui/root.png
 Type=Application
 Terminal=true
 Categories=Science;
