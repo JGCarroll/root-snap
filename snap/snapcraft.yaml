@@ -32,6 +32,7 @@ parts:
   root:
     plugin: cmake
     source: https://github.com/root-project/root.git
+    source-commit: 8e276806b2452d5e4f5f47ffaddb9a3da685ebc4 # v6.30.00
     cmake-parameters:
       - -DCMAKE_CXX_STANDARD=17
       - -Dxrootd=OFF
@@ -53,6 +54,7 @@ parts:
       - libpython3-dev
       - libxml2-dev
       - libkrb5-dev
+      - davix-dev
       # Toolchain
       - g++
       - gfortran
@@ -78,6 +80,7 @@ parts:
       - libxml2-dev
       - libkrb5-dev
       - libgsl0-dev
+      - davix-dev
       # Toolchain
       - gfortran
       - g++
@@ -86,6 +89,7 @@ parts:
       # Libraries
       - x11-utils
       - libglu1-mesa
+      - davix
       # Utilities
       - curl
       - wget
