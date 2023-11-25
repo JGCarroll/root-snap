@@ -44,7 +44,6 @@ parts:
       - libxft-dev
       - libxext-dev
       - libssl-dev
-      - gfortran
       - libpcre++-dev
       - xlibmesa-glu-dev
       - libglew-dev
@@ -76,7 +75,6 @@ parts:
       - libgraphviz-dev
       - libavahi-compat-libdnssd-dev
       - libldap2-dev
-      - libpython3-dev
       - libxml2-dev
       - libkrb5-dev
       - libgsl0-dev
