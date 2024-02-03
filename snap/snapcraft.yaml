@@ -34,6 +34,7 @@ parts:
     source: https://github.com/root-project/root.git
     cmake-parameters:
       - -DCMAKE_CXX_STANDARD=17
+      - -Dfftw3=ON
       - -Dxrootd=OFF
       - -Dbuiltin_xrootd=OFF
     build-packages:
