@@ -35,6 +35,7 @@ parts:
     source-commit: 49ae85f5fe419209f949b04e8253a0015b8946a0 # v6.30.02
     cmake-parameters:
       - -DCMAKE_CXX_STANDARD=17
+      - -Dfftw3=ON
       - -Dxrootd=OFF
       - -Dbuiltin_xrootd=OFF
     build-packages:
