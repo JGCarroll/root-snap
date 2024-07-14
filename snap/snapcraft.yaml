@@ -236,6 +236,7 @@ plugs:
   network:
   opengl:
   x11:
+  wayland:
   desktop:
   desktop-legacy:
   removable-media:
