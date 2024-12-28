@@ -29,6 +29,7 @@ parts:
   root:
     plugin: cmake
     source: https://github.com/root-project/root.git
+    source-commit: b04bd1a28a4b6d722058957e3e0f1092ad62dff1
     cmake-parameters:
       - -DCMAKE_CXX_STANDARD=20
       - -Dbuiltin_all=ON
