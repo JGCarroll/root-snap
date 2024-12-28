@@ -1,0 +1,15 @@
+diff -Naur root/gui/webdisplay/src/RWebDisplayHandle.cxx root-patched/gui/webdisplay/src/RWebDisplayHandle.cxx
+--- root/gui/webdisplay/src/RWebDisplayHandle.cxx	2024-12-28 04:53:17.077395160 +0000
++++ root-patched/gui/webdisplay/src/RWebDisplayHandle.cxx	2024-12-28 08:01:25.093129311 +0000
+@@ -262,9 +262,9 @@
+ 
+    // these are secret parameters, hide them in temp file
+    if (((url.find("token=") != std::string::npos) || (url.find("key=") != std::string::npos)) && !args.IsBatchMode() && !args.IsHeadless()) {
+-      TString filebase = "root_start_";
++      TString filebase = "tmp_root_start_";
+ 
+-      auto f = gSystem->TempFileName(filebase, nullptr, ".html");
++      auto f = gSystem->TempFileName(filebase, std::getenv("SNAP_REAL_HOME"), ".html");
+ 
+       bool ferr = false;
+ 

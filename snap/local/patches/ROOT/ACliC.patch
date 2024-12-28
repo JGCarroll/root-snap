@@ -1,4 +1,4 @@
---- root/build/unix/compiledata.sh	2021-04-14 15:58:10.500738972 +0100
+--- root/cmake/unix/compiledata.sh	2021-04-14 15:58:10.500738972 +0100
 +++ compiledata.sh	2021-04-14 16:57:30.540341620 +0100
 @@ -142,4 +142,7 @@
     mv ${COMPILEDATA}.tmp $COMPILEDATA; fi

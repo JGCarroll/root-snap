@@ -1,5 +1,5 @@
 --- serverapp.py	2023-09-02 16:17:16.826146476 +0100
-+++ root/lib/python3.10/site-packages/jupyter_server/serverapp.py	2023-09-02 16:01:59.539904529 +0100
++++ root/lib/python3.12/site-packages/jupyter_server/serverapp.py	2023-09-02 16:01:59.539904529 +0100
 @@ -1260,7 +1260,7 @@
              return not addr.is_loopback
  

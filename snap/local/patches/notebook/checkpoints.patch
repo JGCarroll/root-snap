@@ -1,5 +1,5 @@
 --- filecheckpoints.py	2023-09-02 16:17:34.818494056 +0100
-+++ root/lib/python3.10/site-packages/jupyter_server/services/contents/filecheckpoints.py	2023-09-02 16:32:03.357168874 +0100
++++ root/lib/python3.12/site-packages/jupyter_server/services/contents/filecheckpoints.py	2023-09-02 16:32:03.357168874 +0100
 @@ -30,7 +30,7 @@
      """
  

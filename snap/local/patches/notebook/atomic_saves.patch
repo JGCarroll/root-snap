@@ -1,5 +1,5 @@
 --- fileio.py	2023-09-02 16:17:25.590316004 +0100
-+++ root/lib/python3.10/site-packages/jupyter_server/services/contents/fileio.py	2023-09-02 16:05:17.801893218 +0100
++++ root/lib/python3.12/site-packages/jupyter_server/services/contents/fileio.py	2023-09-02 16:05:17.801893218 +0100
 @@ -60,7 +60,7 @@
  
      The .~ prefix will make Dropbox ignore the temporary file."""

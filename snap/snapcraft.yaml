@@ -1,5 +1,5 @@
 name: root-framework
-base: core22
+base: core24
 summary: Analyzing petabytes of data, scientifically.
 description: |
   https://root.cern
@@ -24,70 +24,47 @@ confinement: strict
 license: LGPL-2.1+ AND GPL-3.0
 adopt-info: root
 compression: lzo
-assumes:
-  - snap-env
-  - command-chain
 
 parts:
   root:
     plugin: cmake
     source: https://github.com/root-project/root.git
     cmake-parameters:
-      - -DCMAKE_CXX_STANDARD=17
-      - -Dfftw3=ON
-      - -Dxrootd=OFF
+      - -DCMAKE_CXX_STANDARD=20
+      - -Dbuiltin_all=ON
       - -Dbuiltin_xrootd=OFF
-    build-packages:
+      - -Dxrootd=OFF
+      - -Dbuiltin_davix=OFF
+      - -Ddavix=OFF
+    build-packages: &ROOT-Packages
+      # Toolchain
       - build-essential
-      # headers
-      - libxpm-dev
-      - libxft-dev
-      - libxext-dev
-      - libssl-dev
-      - libpcre++-dev
-      - xlibmesa-glu-dev
-      - libglew-dev
-      - libfftw3-dev
-      - libcfitsio-dev
-      - libgraphviz-dev
-      - libpython3-dev
-      - libxml2-dev
-      - libkrb5-dev
-      # Toolchain
-      - g++
       - gfortran
-      - cmake
-    stage-packages:
-      # Headers
-      - libstdc++-11-dev
-      - libpython3-dev
-      - libxft-dev
-      - libxpm-dev
-      - libxpm4
-      - libxext-dev
-      - libssl-dev
-      - libpcre++-dev
-      - xlibmesa-glu-dev
-      - libglew-dev
-      - libfftw3-dev
-      - libcfitsio-dev
-      - libgraphviz-dev
-      - libavahi-compat-libdnssd-dev
-      - libldap2-dev
-      - libxml2-dev
-      - libkrb5-dev
-      - libgsl0-dev
-      # Toolchain
-      - gfortran
-      - g++
       - cmake
       - make
-      # Libraries
-      - x11-utils
-      - libglu1-mesa
-      # Utilities
-      - curl
-      - wget
+      # Headers (including libs)
+      - libpython3-dev
+      - libglu1-mesa-dev
+      - libxpm-dev
+      - libxft-dev
+      - libxext-dev
+      - libjpeg-dev
+      - libpng-dev
+      - libgif-dev
+      - libtiff-dev
+      - libssl-dev
+      - libxml2-dev
+      - uuid-dev
+      - libblas-dev
+      - libtbb-dev
+      - libedit-dev
+      # Libraries (without headers)
+      - libcrypt1
+    # Yes this ships the build environment and is unusual for snaps, but ROOT is literally C++ interpretter and needs -dev packages
+    stage-packages: *ROOT-Packages
+    organize:
+      usr/lib/*-linux-gnu/blas/*: usr/lib/
+      usr/lib/*-linux-gnu/lapack/*: usr/lib/
     override-pull: |
       craftctl default
       minor_version=$(git describe --tags --abbrev=0 | grep -Eo "[0-9]*-[0-9]*-[0-9]*" | cut -d "-" -f 2)
@@ -102,6 +79,7 @@ parts:
       fi
       patch -i $CRAFT_PROJECT_DIR/snap/local/patches/ROOT/ACliC.patch -p 1
       patch -i $CRAFT_PROJECT_DIR/snap/local/patches/ROOT/cli_tools_pyenv_fix.patch -p 1
+      patch -i $CRAFT_PROJECT_DIR/snap/local/patches/ROOT/RBrowser_avoid_file_based_auth.patch -p 1
     override-build: |
       craftctl default
 
@@ -145,7 +123,7 @@ parts:
       - numba
     stage-packages:
       - libgomp1
-      - libtbb2
+      # libtbb used to be here, but is contained in the ROOT above
     override-build: |
       craftctl default
       patch -d $CRAFT_PART_INSTALL -i $CRAFT_PROJECT_DIR/snap/local/patches/notebook/checkpoints.patch -p1
@@ -197,10 +175,10 @@ apps:
     command: usr/local/bin/prepareHistFactory
     command-chain:
       - bin/setup-sandbox.sh
-  proofserv:
-    command: usr/local/bin/proofserv
-    command-chain:
-      - bin/setup-sandbox.sh
+#  proofserv:
+#    command: usr/local/bin/proofserv
+#    command-chain:
+#      - bin/setup-sandbox.sh
   rmkdepend:
     command: usr/local/bin/rmkdepend
     command-chain:
@@ -265,10 +243,10 @@ apps:
     command: usr/local/bin/rootreadspeed
     command-chain:
       - bin/setup-sandbox.sh
-  xpdtest:
-    command: usr/local/bin/xpdtest
-    command-chain:
-      - bin/setup-sandbox.sh
+#  xpdtest:
+#    command: usr/local/bin/xpdtest
+#    command-chain:
+#      - bin/setup-sandbox.sh
   root-exe:
     command: usr/local/bin/root.exe
     command-chain:
@@ -283,10 +261,6 @@ apps:
       - bin/setup-sandbox.sh
   roots-exe:
     command: usr/local/bin/roots.exe
-    command-chain:
-      - bin/setup-sandbox.sh
-  proofserv-exe:
-    command: usr/local/bin/proofserv.exe
     command-chain:
       - bin/setup-sandbox.sh
   cmake:
