@@ -1,15 +1,23 @@
-diff -Naur root/gui/webdisplay/src/RWebDisplayHandle.cxx root-patched/gui/webdisplay/src/RWebDisplayHandle.cxx
---- root/gui/webdisplay/src/RWebDisplayHandle.cxx	2024-12-28 04:53:17.077395160 +0000
-+++ root-patched/gui/webdisplay/src/RWebDisplayHandle.cxx	2024-12-28 08:01:25.093129311 +0000
-@@ -262,9 +262,9 @@
- 
-    // these are secret parameters, hide them in temp file
-    if (((url.find("token=") != std::string::npos) || (url.find("key=") != std::string::npos)) && !args.IsBatchMode() && !args.IsHeadless()) {
--      TString filebase = "root_start_";
-+      TString filebase = "tmp_root_start_";
- 
--      auto f = gSystem->TempFileName(filebase, nullptr, ".html");
-+      auto f = gSystem->TempFileName(filebase, std::getenv("SNAP_REAL_HOME"), ".html");
- 
-       bool ferr = false;
- 
+--- root-patched/gui/webdisplay/src/RWebDisplayHandle.cxx       2025-07-16 08:40:19.564454440 +0100
++++ root/gui/webdisplay/src/RWebDisplayHandle.cxx       2025-07-16 10:01:03.843386066 +0100
+@@ -243,19 +243,7 @@
+ FILE *RWebDisplayHandle::BrowserCreator::TemporaryFile(TString &name, int use_home_dir, const char *suffix)
+ {
+    std::string dirname;
+-   if (use_home_dir > 0) {
+-      if (use_home_dir == 1) {
+-         const char *tmp_dir = gSystem->TempDirectory();
+-         if (tmp_dir && (strncmp(tmp_dir, "/home", 5) == 0))
+-            use_home_dir = 0;
+-         else if (!tmp_dir || (strncmp(tmp_dir, "/tmp", 4) == 0))
+-            use_home_dir = 2;
+-      }
+-
+-      if (use_home_dir > 1)
+-         dirname = gSystem->GetHomeDirectory();
+-   }
+-   return gSystem->TempFileName(name, use_home_dir > 1 ? dirname.c_str() : nullptr, suffix);
++   return gSystem->TempFileName(name, std::getenv("SNAP_REAL_HOME"), suffix);
+ }
+
+ static void DummyTimeOutHandler(int /* Sig */) {}
