@@ -26,7 +26,6 @@ adopt-info: root
 compression: lzo
 assumes:
   - snap-env
-  - command-chain
 
 parts:
   root:
